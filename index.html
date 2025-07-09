@@ -2,80 +2,220 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sourav Mandal | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body.fade {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    body.visible {
+      opacity: 1;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      animation: fadeInUp 0.7s ease both;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--secondary-text);
+      margin-top: -8px;
+      font-weight: 500;
+    }
+
+    .cta-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--accent-color);
+      color: #fff;
+      padding: 0.8rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      color: var(--secondary-text);
+    }
+
+    .stats div {
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .stats strong {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .btn {
+        font-size: 0.95rem;
+        padding: 0.7rem 1.2rem;
+      }
+
+      .stats {
+        gap: 1.2rem;
+      }
+
+      .stats div {
+        font-size: 0.95rem;
+      }
+
+      .navbar {
+        padding-top: 3.5rem;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Toggle Styles */
+    .toggle-container {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 999;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      padding: 10px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px var(--shadow-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.3s ease;
+    }
+  </style>
 </head>
 <body class="fade">
 
-<div class="toggle-container">
-  <label class="theme-toggle">
-    <input type="checkbox" id="modeToggle" />
-    <span class="icon">🌞</span>
-  </label>
-</div>
+  <!-- Theme Toggle -->
+  <div class="toggle-container">
+    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</div>
+  </div>
 
+  <!-- Navbar -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="certifications.html">Certifications</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-<nav class="navbar">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="certifications.html">Certifications</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
+  <!-- Hero Section -->
+  <header class="hero">
+    <img src="images/profile.jpg" alt="Sourav Mandal" class="profile-pic" />
+    <h1>Sourav Mandal</h1>
+    <p class="tagline">Crafting smart solutions with AI, ML & Web</p>
+    <p>Welcome to my portfolio! Explore my work, projects, and background using the menu above.</p>
 
-<header>
-      <img src="images/profile.jpg" alt="Sourav Mandal" class="profile-pic" />
-      <h1>Sourav Mandal</h1>
-      <p>Welcome to my portfolio! Explore my work, projects, and background using the menu above.</p>
-    </header>
+    <div class="cta-buttons">
+      <a href="projects.html" class="btn">View Projects</a>
+      <a href="contact.html" class="btn secondary">Hire Me</a>
+    </div>
 
-<footer>
-  <p>&copy; 2025 Sourav Mandal | All Rights Reserved</p>
-</footer>
+    <div class="stats">
+      <div><strong>10+</strong> Projects</div>
+      <div><strong>5+</strong> Certifications</div>
+      <div><strong>3</strong> Fields: AI/ML, Web, Disaster Tech</div>
+    </div>
+  </header>
 
+  <!-- Footer -->
+  <footer>
+    © 2025 Sourav Mandal | All Rights Reserved
+  </footer>
 
-<script>
-  const toggle = document.getElementById('modeToggle');
-  const body = document.body;
-  const icon = document.querySelector('.theme-toggle .icon');
-  if (localStorage.getItem('dark-mode') === 'true') {
-    body.classList.add('dark-mode');
-    toggle.checked = true;
-    icon.textContent = '🌙';
-  }
-  toggle.addEventListener('change', () => {
-    body.classList.toggle('dark-mode');
-    const isDark = body.classList.contains('dark-mode');
-    icon.textContent = isDark ? '🌙' : '🌞';
-    localStorage.setItem('dark-mode', isDark);
-  });
-</script>
-<script>
-  // Show fade in on load
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.add("visible");
-  });
+  <!-- Scripts -->
+  <script>
+    // Fade-in effect
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("visible");
 
-  // Fade out before navigating
-  document.querySelectorAll("a[href]").forEach(link => {
-    const url = new URL(link.href);
-    const isSameHost = url.origin === location.origin;
+      // Restore theme preference
+      const isDark = localStorage.getItem("theme") === "dark";
+      if (isDark) {
+        document.body.classList.add("dark-mode");
+        document.getElementById("themeToggle").textContent = "☀️";
+      }
+    });
 
-    if (isSameHost) {
-      link.addEventListener("click", function (e) {
-        if (!link.target && !link.href.includes("#")) {
+    // Theme toggle
+    function toggleTheme() {
+      const body = document.body;
+      const toggle = document.getElementById("themeToggle");
+
+      if (body.classList.contains("dark-mode")) {
+        body.classList.remove("dark-mode");
+        toggle.textContent = "🌙";
+        localStorage.setItem("theme", "light");
+      } else {
+        body.classList.add("dark-mode");
+        toggle.textContent = "☀️";
+        localStorage.setItem("theme", "dark");
+      }
+    }
+
+    // Smooth transitions for internal links
+    document.querySelectorAll("a[href]").forEach(link => {
+      const url = new URL(link.href);
+      if (url.origin === location.origin && !link.href.includes("#")) {
+        link.addEventListener("click", function (e) {
           e.preventDefault();
           document.body.classList.remove("visible");
-          setTimeout(() => window.location = link.href, 300);
-        }
-      });
-    }
-  });
-</script>
-
+          setTimeout(() => (window.location = link.href), 300);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
