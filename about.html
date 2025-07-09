@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sourav Mandal | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="fade">
+
+<div class="toggle-container">
+  <label class="theme-toggle">
+    <input type="checkbox" id="modeToggle" />
+    <span class="icon">🌞</span>
+  </label>
+</div>
+
+
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="certifications.html">Certifications</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<section>
+      <h2>About Me</h2>
+      <p>I'm a 3rd-year Computer Science student at Sister Nivedita University. I love building smart solutions using AI and ML, and enjoy bringing tech ideas to life. My passion lies in disaster prediction, data science, and web development. I've developed real-world applications that solve real problems — from earthquake and flood prediction to an AI agriculture guide and a sports streaming platform.</p>
+    </section>
+
+<footer>
+  <p>&copy; 2025 Sourav Mandal | All Rights Reserved</p>
+</footer>
+
+
+<script>
+  const toggle = document.getElementById('modeToggle');
+  const body = document.body;
+  const icon = document.querySelector('.theme-toggle .icon');
+  if (localStorage.getItem('dark-mode') === 'true') {
+    body.classList.add('dark-mode');
+    toggle.checked = true;
+    icon.textContent = '🌙';
+  }
+  toggle.addEventListener('change', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    icon.textContent = isDark ? '🌙' : '🌞';
+    localStorage.setItem('dark-mode', isDark);
+  });
+</script>
+<script>
+  // Show fade in on load
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("visible");
+  });
+
+  // Fade out before navigating
+  document.querySelectorAll("a[href]").forEach(link => {
+    const url = new URL(link.href);
+    const isSameHost = url.origin === location.origin;
+
+    if (isSameHost) {
+      link.addEventListener("click", function (e) {
+        if (!link.target && !link.href.includes("#")) {
+          e.preventDefault();
+          document.body.classList.remove("visible");
+          setTimeout(() => window.location = link.href, 300);
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
