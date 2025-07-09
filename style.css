@@ -112,20 +112,21 @@ footer {
 /* Theme Toggle Switch */
 .toggle-container {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 999;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
 }
 
 .theme-toggle {
   background: var(--card-bg);
-  padding: 10px 14px;
-  border-radius: 25px;
+  padding: 10px;
+  border-radius: 50%;
   box-shadow: 0 4px 8px var(--shadow-color);
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 20px;
   transition: all 0.3s ease;
 }
 
