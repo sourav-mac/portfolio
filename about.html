@@ -16,14 +16,20 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="certifications.html">Certifications</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="nav-container">
+    <div class="nav-toggle" id="navToggle">☰</div>
+    <ul class="nav-links" id="navLinks">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="projects.html">Projects</a></li>
+  <li><a href="certifications.html">Certifications</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+  </div>
+</nav>
+
+
+
 
   <!-- About Section -->
   <section>
@@ -78,6 +84,7 @@
       }
     });
   </script>
+<script src="nav.js"></script>
 
 </body>
 </html>

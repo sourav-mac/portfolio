@@ -6,130 +6,6 @@
   <title>Sourav Mandal | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body.fade {
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    body.visible {
-      opacity: 1;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 4rem 1rem 2rem;
-      animation: fadeInUp 0.7s ease both;
-    }
-
-    .tagline {
-      font-size: 1.2rem;
-      color: var(--secondary-text);
-      margin-top: -8px;
-      font-weight: 500;
-    }
-
-    .cta-buttons {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      background: var(--accent-color);
-      color: #fff;
-      padding: 0.8rem 1.4rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: 0.3s;
-      text-decoration: none;
-    }
-
-    .btn.secondary {
-      background: transparent;
-      border: 2px solid var(--accent-color);
-      color: var(--accent-color);
-    }
-
-    .btn:hover {
-      opacity: 0.85;
-    }
-
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2.5rem;
-      flex-wrap: wrap;
-      color: var(--secondary-text);
-    }
-
-    .stats div {
-      font-size: 1rem;
-      text-align: center;
-    }
-
-    .stats strong {
-      display: block;
-      font-size: 1.5rem;
-      color: var(--text-color);
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .btn {
-        font-size: 0.95rem;
-        padding: 0.7rem 1.2rem;
-      }
-
-      .stats {
-        gap: 1.2rem;
-      }
-
-      .stats div {
-        font-size: 0.95rem;
-      }
-
-      .navbar {
-        padding-top: 3.5rem;
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    .toggle-container {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 999;
-    }
-
-    .theme-toggle {
-      background: var(--card-bg);
-      padding: 10px;
-      border-radius: 50%;
-      box-shadow: 0 4px 8px var(--shadow-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 20px;
-      transition: all 0.3s ease;
-    }
-  </style>
 </head>
 <body class="fade">
 
@@ -138,15 +14,18 @@
     <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</div>
   </div>
 
-  <!-- Navigation -->
+  <!-- Navbar -->
   <nav class="navbar">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="certifications.html">Certifications</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+    <div class="nav-container">
+      <div class="nav-toggle" id="navToggle">☰</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
   </nav>
 
   <!-- Hero Section -->
@@ -175,18 +54,16 @@
 
   <!-- Scripts -->
   <script>
-    // Apply theme and fade in on load
+    // Theme handling and fade-in on load
     document.addEventListener("DOMContentLoaded", () => {
       const isDark = localStorage.getItem("theme") === "dark";
       if (isDark) {
         document.body.classList.add("dark-mode");
         document.getElementById("themeToggle").textContent = "☀️";
       }
-
       document.body.classList.add("visible");
     });
 
-    // Toggle theme
     function toggleTheme() {
       const body = document.body;
       const toggle = document.getElementById("themeToggle");
@@ -195,7 +72,7 @@
       toggle.textContent = isDark ? "☀️" : "🌙";
     }
 
-    // Smooth transition between pages
+    // Smooth page transition
     document.querySelectorAll("a[href]").forEach(link => {
       const url = new URL(link.href);
       if (url.origin === location.origin && !link.href.includes("#")) {
@@ -208,5 +85,7 @@
     });
   </script>
 
+  <!-- Navbar toggle logic -->
+  <script src="nav.js"></script>
 </body>
 </html>
