@@ -292,9 +292,17 @@ h1 {
   }
 
   .profile-pic {
-    width: 120px;
-    height: 120px;
-  }
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--accent-color);
+  margin-bottom: 1.2rem;
+  transition: transform 0.3s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
   h1 {
     font-size: 2rem;
@@ -377,10 +385,15 @@ html {
 ============================ */
 
 .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 4rem 1rem 2rem;
   animation: fadeInUp 0.7s ease both;
 }
+
 
 .tagline {
   font-size: 1.2rem;
@@ -518,34 +531,48 @@ html {
     align-items: center;
   }
 }
- /* name glowing effect */
- .glow-heading::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
+
+/* ========== GLOW HEADING ========== */
+.glow-heading {
+  position: relative;
   font-size: 3rem;
   font-weight: 800;
+  text-align: center;
   letter-spacing: 1px;
+  margin: 0.5rem 0;
+  line-height: 1.2;
+  display: inline-block;
+  color: var(--text-color); /* black in light, white in dark */
+  z-index: 1;
+}
+
+/* Glowing effect behind text */
+.glow-heading::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  color: transparent;
   background: linear-gradient(270deg, var(--glow-color), transparent, var(--glow-color));
   background-size: 400% 400%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: blur(5px);
+  filter: blur(6px);
   opacity: 0.6;
-  animation: moveGlow 6s ease-in-out infinite;
+  animation: moveGlow 6s ease-in-out infinite, pulseGlow 2.5s ease-in-out infinite;
+  white-space: nowrap;
 }
-
-@keyframes moveGlow {
-  0% {
-    background-position: 0% 50%;
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: blur(6px);
+    opacity: 0.6;
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    filter: blur(10px);
+    opacity: 0.9;
   }
 }
