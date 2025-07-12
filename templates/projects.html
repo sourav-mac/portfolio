@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects | Sourav Mandal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/style.css" />
+</head>
+<body class="fade">
+
+  <!-- Theme Toggle -->
+  <div class="toggle-container">
+    <div class="theme-toggle" id="themeToggle">🌙</div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-toggle" id="navToggle">☰</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/projects">Projects</a></li>
+<li><a href="/certifications">Certifications</a></li>
+<li><a href="/cv">CV</a></li>
+<li><a href="/contact">Contact</a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Project Section -->
+  <section>
+    <h2>Projects</h2>
+
+    <div class="project-card">
+      <h3>🌍 Earthquake Prediction System</h3>
+      <p>Flask-based ML app that predicts seismic activity using historical geodata.</p>
+      <a href="#">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <h3>🌊 Flood Prediction System</h3>
+      <p>Real-time flood risk model using weather API and elevation data.</p>
+      <a href="#">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <h3>🌾 AgriGuru</h3>
+      <p>Smart AI assistant for farmers to get crop, soil, and irrigation recommendations.</p>
+      <a href="#">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <h3>📺 Sports Streaming Platform</h3>
+      <p>Custom-built website for streaming live sports (like CricFy TV) for web users.</p>
+      <a href="#">View Project →</a>
+    </div>
+  </section>
+<!-- Chat Toggle Button -->
+<button id="chat-toggle">💬</button>
+
+<!-- Chat Widget -->
+<div id="chat-widget" style="display: none;">
+  <button id="chat-close">×</button> <!-- Cross button inside the box -->
+
+  <div id="chat-box"></div>
+
+  <div class="chat-input-container">
+    <input type="text" id="chat-input" placeholder="Ask me anything..." />
+    <button id="send-btn">Send</button>
+  </div>
+</div>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Sourav Mandal | All Rights Reserved</p>
+  </footer>
+
+
+  <!-- Scripts -->
+  <script src="static/nav.js"></script>
+  <script>
+    // Theme handling
+    document.addEventListener("DOMContentLoaded", () => {
+      const isDark = localStorage.getItem("theme") === "dark";
+      const toggle = document.getElementById("themeToggle");
+      if (isDark) {
+        document.body.classList.add("dark-mode");
+        toggle.textContent = "☀️";
+      }
+      document.body.classList.add("visible");
+
+      toggle.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+        toggle.textContent = isDark ? "☀️" : "🌙";
+      });
+    });
+
+    // Smooth fade transitions
+    document.querySelectorAll("a[href]").forEach(link => {
+      const url = new URL(link.href);
+      if (url.origin === location.origin && !link.href.includes("#")) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.body.classList.remove("visible");
+          setTimeout(() => window.location = link.href, 300);
+        });
+      }
+    });
+  </script>
+<script src="/static/chat.js"></script>
+
+</body>
+</html>
