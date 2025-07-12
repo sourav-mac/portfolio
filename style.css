@@ -541,17 +541,15 @@ html {
 /* ========== GLOW HEADING ========== */
 .glow-heading {
   position: relative;
-  font-size: clamp(1.8rem, 5vw, 3rem); /* responsive */
-  font-weight: 800;
-  z-index: 1;
-  text-align: center;
-  color: var(--text-color);
-  letter-spacing: 1px;
-  margin: 0.5rem 0;
-  line-height: 1.2;
   display: inline-block;
-  white-space: nowrap;         /* ✅ Keeps text in one line */
-  overflow: hidden;            /* ✅ Avoids overflow */
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--text-color);
+  text-align: center;
+  white-space: nowrap;
+  z-index: 1;
+  line-height: 1.2;
+  margin: 0.5rem 0;
 }
 
 .glow-heading::before {
@@ -559,17 +557,23 @@ html {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -1;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  background: linear-gradient(270deg, var(--glow-color), transparent, var(--glow-color));
-  filter: blur(6px);
-  opacity: 0.5;
-  background-size: 400% 400%;
-  animation: moveGlow 6s linear infinite;
+  color: transparent;
+  background: linear-gradient(
+    270deg,
+    var(--glow-color1),
+    var(--glow-color2),
+    var(--glow-color1)
+  );
+  background-size: 200% 200%;
+  filter: blur(8px);
+  opacity: 0.6;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: moveGlow 6s ease-in-out infinite, pulseGlow 3s ease-in-out infinite;
   white-space: nowrap;
-  text-align: center;
-  color: var(--glow-color1);
 }
 
 @keyframes moveGlow {
@@ -584,24 +588,24 @@ html {
   }
 }
 
-
 @keyframes pulseGlow {
   0%, 100% {
-    opacity: 0.6;
-    filter: blur(8px);
+    opacity: 0.5;
+    filter: blur(7px);
   }
   50% {
-    opacity: 1;
+    opacity: 0.9;
     filter: blur(12px);
   }
 }
 
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .glow-heading {
     font-size: 2.2rem;
   }
 }
+
 @media (max-width: 480px) {
   .glow-heading {
     font-size: 1.8rem;
