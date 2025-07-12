@@ -249,6 +249,14 @@ footer {
     flex-direction: column;
     gap: 1rem;
     display: none;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    max-width: 100%;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar{
+    display: none;
   }
 
   .nav-links.show {
@@ -259,6 +267,8 @@ footer {
     padding: 1rem;
     border-radius: 20px;
     width: 90%;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 
