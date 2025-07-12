@@ -7,6 +7,9 @@
   --navbar-bg: #e0e0e0; 
   --shadow-color: rgba(0, 0, 0, 0.05);
   --glow-color: #00ffff;
+  --glow-color1: #00ffff;
+  --glow-color2: #00ccff;
+  --glow-shadow: #00ffff;
 }
 
 body.dark-mode {
@@ -18,6 +21,9 @@ body.dark-mode {
   --navbar-bg: #2a2b36; 
   --shadow-color: rgba(0, 0, 0, 0.2);
   --glow-color: #39ff14; 
+  --glow-color1: #39ff14;
+  --glow-color2: #00cc66;
+  --glow-shadow: #39ff14;
 }
 
 body {
@@ -537,16 +543,18 @@ html {
   position: relative;
   font-size: 3rem;
   font-weight: 800;
+  z-index: 1;
   text-align: center;
-  letter-spacing: 1px;
   margin: 0.5rem 0;
+  letter-spacing: 1px;
   line-height: 1.2;
   display: inline-block;
-  color: var(--text-color); /* black in light, white in dark */
-  z-index: 1;
+  color: var(--text-color); /* <-- This ensures text shows */
+  max-width: 100%;
+  word-break: break-word;
+  white-space: normal;
 }
 
-/* Glowing effect behind text */
 .glow-heading::before {
   content: attr(data-text);
   position: absolute;
@@ -555,24 +563,47 @@ html {
   width: 100%;
   height: 100%;
   z-index: -1;
-  color: transparent;
   background: linear-gradient(270deg, var(--glow-color), transparent, var(--glow-color));
   background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: blur(6px);
+  filter: blur(8px);
   opacity: 0.6;
   animation: moveGlow 6s ease-in-out infinite, pulseGlow 2.5s ease-in-out infinite;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
-@keyframes pulseGlow {
-  0%, 100% {
-    filter: blur(6px);
-    opacity: 0.6;
+
+@keyframes moveGlow {
+  0% {
+    background-position: 0% 50%;
   }
   50% {
-    filter: blur(10px);
-    opacity: 0.9;
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    filter: blur(8px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(12px);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .glow-heading {
+    font-size: 2.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .glow-heading {
+    font-size: 1.8rem;
   }
 }
