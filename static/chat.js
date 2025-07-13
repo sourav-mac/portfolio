@@ -73,9 +73,8 @@ document.getElementById("chat-input").addEventListener("keypress", function (e) 
 document.getElementById("send-btn").addEventListener("click", sendMessage);
 
 document.getElementById("chat-close").addEventListener("click", () => {
-  document.getElementById("chat-widget").style.display = "none"; // Hide chat
-  document.getElementById("chat-box").innerHTML = "";             // Clear messages
+  document.getElementById("chat-widget").style.display = "none"; // Hide
 });
 
-
-
+// make the chat bold or italic
+chatbox.innerHTML+=`<div class="bot-msg">${data.reply || "Error: No response."}</div>`;
