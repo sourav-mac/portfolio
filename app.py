@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+from markdown import markdown 
 
 load_dotenv()
 app = Flask(__name__)
@@ -41,7 +42,8 @@ def chat():
 
     try:
         response = model.generate_content(user_input)
-        return jsonify({"reply": response.text})
+        html_reply=markdown(response.text)#convert markdown to html
+        return jsonify({"reply": html_reply})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
