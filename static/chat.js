@@ -1,80 +1,64 @@
+// ✅ DOM Elements
+const input = document.getElementById("chat-input");
+const chatBox = document.getElementById("chat-box");
+const spinner = document.getElementById("chat-loading");
+const chatToggle = document.getElementById("chat-toggle");
+const chatWidget = document.getElementById("chat-widget");
+const chatClose = document.getElementById("chat-close");
+const sendBtn = document.getElementById("send-btn");
+
+// ✅ Send Message Function
 async function sendMessage() {
-      const input = document.getElementById("chat-input");
-      const chatBox = document.getElementById("chat-box");
-      const message = input.value.trim();
-      if (!message) return;
-      chatBox.innerHTML += `<div class="user-msg">${message}</div>`;
-      input.value = "";
-
-      try {
-        const res = await fetch("/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message })
-        });
-
-        const data = await res.json();
-        chatBox.innerHTML += `<div class="bot-msg">${data.reply || "Error: No response."}</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
-      } catch (error) {
-        chatBox.innerHTML += `<div class="bot-msg">Error: ${error.message}</div>`;
-      }
-    }
-
-  document.getElementById("chat-input").addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();  // prevents line break
-      sendMessage();       // call your send function
-    }
-  });
-
-// Toggle Chat UI
-document.getElementById("chat-toggle").addEventListener("click", () => {
-  document.getElementById("chat-widget").style.display = "flex";
-  document.getElementById("chat-toggle").style.display = "none";
-});
-
-document.getElementById("chat-close").addEventListener("click", () => {
-  document.getElementById("chat-widget").style.display = "none";
-  document.getElementById("chat-toggle").style.display = "block";
-});
-
-// Send message function
-async function sendMessage() {
-  const input = document.getElementById("chat-input");
-  const chatBox = document.getElementById("chat-box");
   const message = input.value.trim();
   if (!message) return;
 
+  // Show user message
   chatBox.innerHTML += `<div class="user-msg">${message}</div>`;
   input.value = "";
+
+  // Show spinner
+  spinner.style.display = "block";
 
   try {
     const res = await fetch("/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({ message }),
     });
 
     const data = await res.json();
-    chatBox.innerHTML += `<div class="bot-msg">${data.reply || "Error: No response."}</div>`;
+
+    // Hide spinner
+    spinner.style.display = "none";
+
+    // Show bot response
+    chatBox.innerHTML += `<div class="bot-msg">${data.reply || "No response."}</div>`;
     chatBox.scrollTop = chatBox.scrollHeight;
+
   } catch (error) {
+    spinner.style.display = "none";
     chatBox.innerHTML += `<div class="bot-msg">Error: ${error.message}</div>`;
   }
 }
 
-// Send on Enter
-document.getElementById("chat-input").addEventListener("keypress", function (e) {
-  if (e.key === "Enter") sendMessage();
+// ✅ Send on Button Click
+sendBtn.addEventListener("click", sendMessage);
+
+// ✅ Send on Enter Key
+input.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    e.preventDefault(); // prevent newline
+    sendMessage();
+  }
 });
 
-// Send on Button Click
-document.getElementById("send-btn").addEventListener("click", sendMessage);
-
-document.getElementById("chat-close").addEventListener("click", () => {
-  document.getElementById("chat-widget").style.display = "none"; // Hide
+// ✅ Toggle Chat UI
+chatToggle.addEventListener("click", () => {
+  chatWidget.style.display = "flex";
+  chatToggle.style.display = "none";
 });
 
-// make the chat bold or italic
-chatbox.innerHTML+=`<div class="bot-msg">${data.reply || "Error: No response."}</div>`;
+chatClose.addEventListener("click", () => {
+  chatWidget.style.display = "none";
+  chatToggle.style.display = "block";
+});

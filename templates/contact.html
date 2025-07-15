@@ -11,8 +11,9 @@
 
   <!-- Theme Toggle -->
   <div class="toggle-container">
-    <div class="theme-toggle" id="themeToggle">🌙</div>
-  </div>
+  <!-- Uiverse switch -->
+  <input type="checkbox" class="l" id="themeToggle" />
+</div>
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -47,7 +48,11 @@
   <button id="chat-close">×</button> <!-- Cross button inside the box -->
 
   <div id="chat-box"></div>
-
+<div id="chat-loading" class="spinner-container" style="display: none;">
+  <div class="spinner">
+    <div class="spinner1"></div>
+  </div>
+</div>
   <div class="chat-input-container">
     <input type="text" id="chat-input" placeholder="Ask me anything..." />
     <button id="send-btn">Send</button>
@@ -62,24 +67,6 @@
   <!-- Scripts -->
   <script src="static/nav.js"></script>
   <script>
-    // Theme Setup
-    document.addEventListener("DOMContentLoaded", () => {
-      const isDark = localStorage.getItem("theme") === "dark";
-      const toggle = document.getElementById("themeToggle");
-
-      if (isDark) {
-        document.body.classList.add("dark-mode");
-        toggle.textContent = "☀️";
-      }
-      document.body.classList.add("visible");
-
-      toggle.addEventListener("click", () => {
-        const isDark = document.body.classList.toggle("dark-mode");
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-        toggle.textContent = isDark ? "☀️" : "🌙";
-      });
-    });
-
     // Smooth transitions
     document.querySelectorAll("a[href]").forEach(link => {
       const url = new URL(link.href);

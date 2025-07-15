@@ -9,10 +9,12 @@
 </head>
 <body class="fade">
 
-  <!-- Theme Toggle -->
-  <div class="toggle-container">
-    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</div>
-  </div>
+<!-- toggle container  -->
+<div class="toggle-container">
+  <!-- Uiverse switch -->
+  <input type="checkbox" class="l" id="themeToggle" />
+</div>
+
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -20,26 +22,40 @@
       <div class="nav-toggle" id="navToggle">☰</div>
       <ul class="nav-links" id="navLinks">
         <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/projects">Projects</a></li>
-        <li><a href="/certifications">Certifications</a></li>
-        <li><a href="/cv">CV</a></li>
-        <li><a href="/contact">Contact</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/projects">Projects</a></li>
+<li><a href="/certifications">Certifications</a></li>
+<li><a href="/cv">CV</a></li>
+<li><a href="/contact">Contact</a></li>
+
       </ul>
     </div>
-  </nav>
+  </nav>  
+
 
   <!-- Hero Section -->
   <header class="hero">
+    <!-- <img src="static/images/profile.jpg" alt="Sourav Mandal" class="profile-pic" /> -->
+     <div class="card">
+  <div class="card2">
     <img src="static/images/profile.jpg" alt="Sourav Mandal" class="profile-pic" />
+  </div>
+</div>
+
     <h1 class="glow-heading" data-text="Sourav Mandal">Sourav Mandal</h1>
     <p class="tagline">Crafting smart solutions with AI, ML & Web</p>
     <p>Welcome to my portfolio! Explore my work, projects, and background using the menu above.</p>
 
-    <div class="cta-buttons">
-      <a href="/projects" class="btn">View Projects</a>
-      <a href="/contact" class="btn secondary">Hire Me</a>
-    </div>
+    <!-- CTA button  -->
+     <div class="cta-buttons">
+  <a href="/projects">
+    <button><span>View Projects</span></button>
+  </a>
+  <a href="/contact">
+    <button><span>Hire Me</span></button>
+  </a>
+</div>
+
 
     <div class="stats">
       <div><strong>10+</strong> Projects</div>
@@ -56,6 +72,12 @@
   <button id="chat-close">×</button> <!-- Cross button inside the box -->
 
   <div id="chat-box"></div>
+<!-- Chat Loading Spinner -->
+<div id="chat-loading" class="spinner-container" style="display: none;">
+  <div class="spinner">
+    <div class="spinner1"></div>
+  </div>
+</div>
 
   <div class="chat-input-container">
     <input type="text" id="chat-input" placeholder="Ask me anything..." />
@@ -72,23 +94,7 @@
 
   <!-- Scripts -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const isDark = localStorage.getItem("theme") === "dark";
-      if (isDark) {
-        document.body.classList.add("dark-mode");
-        document.getElementById("themeToggle").textContent = "☀️";
-      }
-      document.body.classList.add("visible");
-    });
-
-    function toggleTheme() {
-      const body = document.body;
-      const toggle = document.getElementById("themeToggle");
-      const isDark = body.classList.toggle("dark-mode");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-      toggle.textContent = isDark ? "☀️" : "🌙";
-    }
-
+        // Smooth fade transitions
     document.querySelectorAll("a[href]").forEach(link => {
       const url = new URL(link.href, window.location.href);
       if (url.origin === location.origin && !link.href.includes("#")) {

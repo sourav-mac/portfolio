@@ -219,12 +219,12 @@ footer {
   display: inline-block;
   text-align: center;
   white-space: nowrap;
-  min-width: 100px; /* Ensures pill size */
+  min-width: 100px; 
   padding: 0.4rem 1rem;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   color: var(--text-color);
-  border-radius: 999px; /* Perfect pill shape */
+  border-radius: 999px; 
   transition: all 0.3s ease;
 }
 
@@ -236,12 +236,10 @@ footer {
 .nav-links li a.active {
   background-color: var(--accent-color);
   color: white;
-  border-radius: 999px; /* Also round for active state */
+  border-radius: 999px; 
 }
 
 
-
-/* Responsive for Tablet & Mobile */
 @media (max-width: 768px) {
   .nav-container {
     flex-direction: column;
@@ -315,18 +313,6 @@ h1 {
     padding: 2rem 1rem;
   }
 
-  .profile-pic {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 6px solid var(--accent-color);
-  margin-bottom: 1.2rem;
-  transition: transform 0.3s ease;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
   h1 {
     font-size: 2rem;
@@ -898,4 +884,265 @@ body.dark-mode .bot-msg {
   color: var(--accent-color, #00b894); /* fallback accent */
   transform: scale(1.2);
   transition: all 0.3s ease;
+}
+
+
+/* Uiverse toggle switch styles by JkHuger */
+.l {
+  display: block;
+  margin-bottom: 1.5em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.l {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0.75em;
+  box-shadow: 0.125em 0.125em 0 0.125em rgba(0, 0, 0, 0.3) inset;
+  color: #fdea7b;
+  display: inline-flex;
+  align-items: center;
+  margin: auto;
+  padding: 0.15em;
+  width: 3em;
+  height: 1.5em;
+  transition: background-color 0.1s 0.3s ease-out, box-shadow 0.1s 0.3s ease-out;
+  appearance: none;
+}
+
+.l:before,
+.l:after {
+  content: "";
+  display: block;
+}
+
+.l:before {
+  background-color: #d7d7d7;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  transition: background-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+  z-index: 1;
+}
+
+.l:after {
+  background:
+    linear-gradient(transparent 50%, rgba(0, 0, 0, 0.15) 0) 0 50% / 50% 100%,
+    repeating-linear-gradient(90deg, #bbb 0, #bbb, #bbb 20%, #999 20%, #999 40%) 0 50% / 50% 100%,
+    radial-gradient(circle at 50% 50%, #888 25%, transparent 26%);
+  background-repeat: no-repeat;
+  border: 0.25em solid transparent;
+  border-left: 0.4em solid #d8d8d8;
+  border-right: 0 solid transparent;
+  transition: border-left-color 0.1s 0.3s ease-out, transform 0.3s ease-out;
+  transform: translateX(-22.5%);
+  transform-origin: 25% 50%;
+  width: 1.2em;
+  height: 1em;
+  box-sizing: border-box;
+}
+
+.l:checked {
+  background-color: rgba(0, 0, 0, 0.45);
+  box-shadow: 0.125em 0.125em 0 0.125em rgba(0, 0, 0, 0.1) inset;
+}
+
+.l:checked:before {
+  background-color: currentColor;
+  transform: translateX(125%);
+}
+
+.l:checked:after {
+  border-left-color: currentColor;
+  transform: translateX(-2.5%) rotateY(180deg);
+}
+
+.l:focus {
+  outline: 0;
+}
+
+
+/* Animated CTA Buttons */
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cta-buttons button {
+  position: relative;
+  margin: 0;
+  padding: 0.8em 1em;
+  outline: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  background-color: var(--accent-color);  /* Use your theme's accent color */
+  border-radius: 10px;
+  color: var(--text-color);  /* Use your theme's text color */
+  font-weight: 300;
+  font-size: 18px;
+  font-family: inherit;
+  z-index: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.cta-buttons button:hover {
+  animation: sh0 0.5s ease-in-out both;
+}
+
+.cta-buttons button:hover span {
+  animation: storm 0.7s ease-in-out both;
+  animation-delay: 0.06s;
+}
+
+.cta-buttons button::before,
+.cta-buttons button::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  transition: transform 0.15s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
+  z-index: -1;
+  transform: translate(100%, -25%) translate3d(0, 0, 0);
+}
+
+.cta-buttons button:hover::before,
+.cta-buttons button:hover::after {
+  opacity: 0.15;
+  transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.cta-buttons button:hover::before {
+  transform: translate3d(50%, 0, 0) scale(0.9);
+}
+
+.cta-buttons button:hover::after {
+  transform: translate(50%, 0) scale(1.1);
+}
+
+@keyframes sh0 {
+  0% { transform: rotate(0deg) translate3d(0, 0, 0); }
+  25% { transform: rotate(7deg) translate3d(0, 0, 0); }
+  50% { transform: rotate(-7deg) translate3d(0, 0, 0); }
+  75% { transform: rotate(1deg) translate3d(0, 0, 0); }
+  100% { transform: rotate(0deg) translate3d(0, 0, 0); }
+}
+
+@keyframes storm {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+/* profile picture animation */
+.card {
+  width: 190px;
+  height: 190px;
+  background-image: linear-gradient(163deg, var(--glow-light), var(--glow-dark));
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.card2 {
+  width: 190px;
+  height: 190px;
+  background-color: var(--card-bg);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.profile-pic {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    box-shadow: 0 0 60px 8px var(--glow-shadow);
+  }
+
+  .card2:hover {
+    transform: scale(0.98);
+  }
+}
+
+body:not(.dark-mode) .card:hover {
+  background-image: linear-gradient(163deg, #00cfff 0%, #ff6ec4 100%);
+  box-shadow: 0px 0px 30px 1px rgba(0, 207, 255, 0.3);
+}
+body.dark-mode .card:hover {
+  background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+  box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
+}
+.card2:hover {
+  transform: scale(0.98);
+}
+
+
+
+/* Spinner Wrapper inside Chat Box */
+.chat-spinner {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+/* Spinner Animation */
+.spinner {
+  background-image: linear-gradient(rgb(186, 66, 255) 35%, rgb(0, 225, 255));
+  width: 40px;
+  height: 40px;
+  animation: spinning82341 1.7s linear infinite;
+  text-align: center;
+  border-radius: 50%;
+  filter: blur(1px);
+  box-shadow: 0px -2px 10px rgb(186, 66, 255), 0px 2px 10px rgb(0, 225, 255);
+}
+
+.spinner1 {
+  background-color: rgb(36, 36, 36);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  filter: blur(6px);
+}
+
+@keyframes spinning82341 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+#chat-box {
+  position: relative;
+  overflow-y: auto;
+  max-height: 300px;
+  padding: 10px;
+}
+.spinner-container {
+  position: absolute;
+  bottom: 55px;
+  left: 13px; /* ⬅️ Increase this value to move it further right */
+  z-index: 2;
 }
