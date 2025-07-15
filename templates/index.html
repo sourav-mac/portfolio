@@ -1,60 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sourav Mandal | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="/static/style.css" />
 </head>
+
 <body class="fade">
 
-<!-- toggle container  -->
-<div class="toggle-container">
-  <!-- Uiverse switch -->
-  <input type="checkbox" class="l" id="themeToggle" />
-</div>
+  <!-- toggle container  -->
+  <div class="toggle-container">
+    <!-- Uiverse switch -->
+    <input type="checkbox" class="l" id="themeToggle" />
+  </div>
 
 
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
-      <div class="nav-toggle" id="navToggle">☰</div>
+<!-- Hamburger Menu from Uiverse.io -->
+<label class="hamburger" id="navToggle">
+  <input type="checkbox" id="hamburgerCheckbox">
+  <svg viewBox="0 0 32 32">
+    <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+    <path class="line" d="M7 16 27 16"></path>
+  </svg>
+</label>
       <ul class="nav-links" id="navLinks">
-        <li><a href="/">Home</a></li>
-<li><a href="/about">About</a></li>
-<li><a href="/projects">Projects</a></li>
-<li><a href="/certifications">Certifications</a></li>
-<li><a href="/cv">CV</a></li>
-<li><a href="/contact">Contact</a></li>
-
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('projects') }}">Projects</a></li>
+        <li><a href="{{ url_for('certifications') }}">Certifications</a></li>
+        <li><a href="{{ url_for('cv') }}">CV</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
       </ul>
     </div>
-  </nav>  
+  </nav>
 
 
   <!-- Hero Section -->
   <header class="hero">
     <!-- <img src="static/images/profile.jpg" alt="Sourav Mandal" class="profile-pic" /> -->
-     <div class="card">
-  <div class="card2">
-    <img src="static/images/profile.jpg" alt="Sourav Mandal" class="profile-pic" />
-  </div>
-</div>
+    <div class="card">
+      <div class="card2">
+        <img src="static/images/profile.jpg" alt="Sourav Mandal" class="profile-pic" />
+      </div>
+    </div>
 
     <h1 class="glow-heading" data-text="Sourav Mandal">Sourav Mandal</h1>
     <p class="tagline">Crafting smart solutions with AI, ML & Web</p>
     <p>Welcome to my portfolio! Explore my work, projects, and background using the menu above.</p>
 
     <!-- CTA button  -->
-     <div class="cta-buttons">
-  <a href="/projects">
-    <button><span>View Projects</span></button>
-  </a>
-  <a href="/contact">
-    <button><span>Hire Me</span></button>
-  </a>
-</div>
+    <div class="cta-buttons">
+      <a href="/projects">
+        <button><span>View Projects</span></button>
+      </a>
+      <a href="/contact">
+        <button><span>Hire Me</span></button>
+      </a>
+    </div>
 
 
     <div class="stats">
@@ -64,21 +73,25 @@
     </div>
   </header>
 
-<!-- Chat Toggle Button -->
-<button id="chat-toggle">💬</button>
+  <!-- Chat Toggle Button -->
+  <button id="chat-toggle">💬</button>
 
-<!-- Chat Widget -->
+  <!-- Chat Widget -->
 <div id="chat-widget" style="display: none;">
-  <button id="chat-close">×</button> <!-- Cross button inside the box -->
+  <!-- Close Button -->
+  <button id="chat-close">×</button>
 
-  <div id="chat-box"></div>
-<!-- Chat Loading Spinner -->
-<div id="chat-loading" class="spinner-container" style="display: none;">
-  <div class="spinner">
-    <div class="spinner1"></div>
+  <!-- Chat Messages Area -->
+  <div id="chat-box">
+    <!-- Inline Chat Loading Spinner -->
+    <div id="chat-loading" class="spinner-container" style="display: none;">
+      <div class="spinner">
+        <div class="spinner1"></div>
+      </div>
+    </div>
   </div>
-</div>
 
+  <!-- Chat Input -->
   <div class="chat-input-container">
     <input type="text" id="chat-input" placeholder="Ask me anything..." />
     <button id="send-btn">Send</button>
@@ -94,7 +107,7 @@
 
   <!-- Scripts -->
   <script>
-        // Smooth fade transitions
+    // Smooth fade transitions
     document.querySelectorAll("a[href]").forEach(link => {
       const url = new URL(link.href, window.location.href);
       if (url.origin === location.origin && !link.href.includes("#")) {
@@ -106,8 +119,9 @@
       }
     });
   </script>
-<script src="/static/nav.js"></script>
-<script src="/static/chat.js"></script>
+  <script src="/static/nav.js"></script>
+  <script src="/static/chat.js"></script>
 
 </body>
+
 </html>

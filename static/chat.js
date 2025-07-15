@@ -7,17 +7,43 @@ const chatWidget = document.getElementById("chat-widget");
 const chatClose = document.getElementById("chat-close");
 const sendBtn = document.getElementById("send-btn");
 
+// ✅ Scroll to bottom
+function scrollToBottom() {
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// ✅ Show Loading Spinner
+function showLoading() {
+  spinner.style.display = "flex";
+  scrollToBottom();
+}
+
+// ✅ Hide Loading Spinner
+function hideLoading() {
+  spinner.style.display = "none";
+}
+
+// ✅ Append message to chat box
+function appendMessage(content, type = "bot") {
+  const msg = document.createElement("div");
+  msg.className = type === "user" ? "user-msg" : "bot-msg";
+  msg.innerHTML = content; // ← use innerHTML to render HTML tags properly
+  chatBox.insertBefore(msg, spinner);
+  scrollToBottom();
+}
+
+
 // ✅ Send Message Function
 async function sendMessage() {
   const message = input.value.trim();
   if (!message) return;
 
-  // Show user message
-  chatBox.innerHTML += `<div class="user-msg">${message}</div>`;
+  // Show user message and clear input
+  appendMessage(message, "user");
   input.value = "";
 
   // Show spinner
-  spinner.style.display = "block";
+  showLoading();
 
   try {
     const res = await fetch("/chat", {
@@ -29,15 +55,14 @@ async function sendMessage() {
     const data = await res.json();
 
     // Hide spinner
-    spinner.style.display = "none";
+    hideLoading();
 
-    // Show bot response
-    chatBox.innerHTML += `<div class="bot-msg">${data.reply || "No response."}</div>`;
-    chatBox.scrollTop = chatBox.scrollHeight;
+    // Show bot reply
+    appendMessage(data.reply || "No response.", "bot");
 
   } catch (error) {
-    spinner.style.display = "none";
-    chatBox.innerHTML += `<div class="bot-msg">Error: ${error.message}</div>`;
+    hideLoading();
+    appendMessage("Error: " + error.message, "bot");
   }
 }
 
@@ -47,15 +72,16 @@ sendBtn.addEventListener("click", sendMessage);
 // ✅ Send on Enter Key
 input.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
-    e.preventDefault(); // prevent newline
+    e.preventDefault();
     sendMessage();
   }
 });
 
-// ✅ Toggle Chat UI
+// ✅ Toggle Chat Widget
 chatToggle.addEventListener("click", () => {
   chatWidget.style.display = "flex";
   chatToggle.style.display = "none";
+  scrollToBottom();
 });
 
 chatClose.addEventListener("click", () => {
