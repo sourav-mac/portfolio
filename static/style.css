@@ -34,6 +34,10 @@ body.dark-mode {
   --scroll-thumb-hover: #666;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -72,7 +76,6 @@ header {
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  border: 6px solid var(--accent-color);
   margin-bottom: 1.5rem;
   transition: transform 0.3s ease;
 }
@@ -263,6 +266,7 @@ html {
   font-size: 1rem;
 }
 
+/* certification img  */
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -1102,6 +1106,9 @@ body.dark-mode .card:hover {
   width: fit-content;
   max-width: 90%;
   transition: background 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-container {
@@ -1118,7 +1125,7 @@ body.dark-mode .card:hover {
   padding: 0;
   flex-wrap: wrap;
   justify-content: center;
-  /* ✅ Center wrapped items on all screens */
+  align-items: center;
 }
 
 .nav-links li a {
@@ -1126,23 +1133,25 @@ body.dark-mode .card:hover {
   text-align: center;
   white-space: nowrap;
   min-width: 100px;
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1.2rem;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   color: var(--text-color);
   border-radius: 999px;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-links li a:hover {
   background-color: var(--accent-color);
   color: white;
+  transform: translateY(-2px);
 }
 
 .nav-links li a.active {
   background-color: var(--accent-color);
   color: white;
   border-radius: 999px;
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.3); /* subtle glow ring */
 }
 
 /* ===============================

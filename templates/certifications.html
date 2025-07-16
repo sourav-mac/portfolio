@@ -6,28 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Certifications | Sourav Mandal</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="static/style.css" />
+  <link rel="stylesheet" href="/static/style.css" />
+
+  <!-- GSAP & Barba -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://unpkg.com/@barba/core"></script>
 </head>
 
-<body class="fade">
+<body class="fade" data-barba="wrapper">
 
-  <!-- Theme Toggle -->
-  <div class="toggle-container">
-    <!-- Uiverse switch -->
-    <input type="checkbox" class="l" id="themeToggle" />
-  </div>
-
-  <!-- Navbar -->
+  <!-- ✅ Navbar outside the Barba container -->
   <nav class="navbar">
     <div class="nav-container">
-      <!-- Hamburger Menu from Uiverse.io -->
-<label class="hamburger" id="navToggle">
-  <input type="checkbox" id="hamburgerCheckbox">
-  <svg viewBox="0 0 32 32">
-    <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
-    <path class="line" d="M7 16 27 16"></path>
-  </svg>
-</label>
+      <label class="hamburger" id="navToggle">
+        <input type="checkbox" id="hamburgerCheckbox">
+        <svg viewBox="0 0 32 32">
+          <path class="line line-top-bottom"
+            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+          </path>
+          <path class="line" d="M7 16 27 16"></path>
+        </svg>
+      </label>
 
       <ul class="nav-links" id="navLinks">
         <li><a href="{{ url_for('home') }}">Home</a></li>
@@ -40,76 +39,66 @@
     </div>
   </nav>
 
+  <!-- ✅ Barba container for transitionable content -->
+  <div data-barba="container" data-barba-namespace="certifications">
 
-  <!-- Certification Section -->
-  <section class="cert-section">
-    <div class="cert-text">
-      <h2>My Certifications</h2>
-      <div class="cert-list">
-        <p>📘 <strong>Data Structures</strong> – University of California San Diego (Coursera)</p>
-        <p>📝 <strong>Teach English Now!</strong> – Arizona State University (Coursera)</p>
-        <p>🏆 <strong>Hackathon Finisher</strong> – TechnoFunda Investing Academy</p>
-        <p>🧠 <strong>Soft Skills & People Management</strong> – IBM (Coursera)</p>
-        <p>🌩️ <strong>Vultr Cloud Hackathon</strong> – GeeksforGeeks & Vultr</p>
+    <!-- Theme Toggle -->
+    <div class="toggle-container">
+      <input type="checkbox" class="l" id="themeToggle" />
+    </div>
+
+    <!-- Certification Section -->
+    <section class="cert-section">
+      <div class="cert-text">
+        <h2>My Certifications</h2>
+        <div class="cert-list">
+          <p>📘 <strong>Data Structures</strong> – University of California San Diego (Coursera)</p>
+          <p>📝 <strong>Teach English Now!</strong> – Arizona State University (Coursera)</p>
+          <p>🏆 <strong>Hackathon Finisher</strong> – TechnoFunda Investing Academy</p>
+          <p>🧠 <strong>Soft Skills & People Management</strong> – IBM (Coursera)</p>
+          <p>🌩️ <strong>Vultr Cloud Hackathon</strong> – GeeksforGeeks & Vultr</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <img src="/static/images/COURSE datastr.jpg" alt="Data Structure Certificate">
+        <img src="/static/images/COURSE english.jpg" alt="Teach English Now">
+        <img src="/static/images/Technofunda.jpg" alt="TechnoFunda">
+        <img src="/static/images/Coursera.jpg" alt="Soft Skills & People Management">
+        <img src="/static/images/vultr.jpg" alt="Vultr Cloud Hackathon">
+      </div>
+    </section>
+
+    <!-- Chat Toggle Button -->
+    <button id="chat-toggle">💬</button>
+
+    <!-- Chat Widget -->
+    <div id="chat-widget" style="display: none;">
+      <button id="chat-close">×</button>
+      <div id="chat-box">
+        <div id="chat-loading" class="spinner-container" style="display: none;">
+          <div class="spinner">
+            <div class="spinner1"></div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-container">
+        <input type="text" id="chat-input" placeholder="Ask me anything..." />
+        <button id="send-btn">Send</button>
       </div>
     </div>
 
-    <div class="gallery">
-      <img src="/static/images/COURSE datastr.jpg" alt="Data Structure Certificate">
-      <img src="/static/images/COURSE english.jpg" alt="Teach English Now">
-      <img src="/static/images/Technofunda.jpg" alt="TechnoFunda">
-      <img src="/static/images/Coursera.jpg" alt="Soft Skills & People Management">
-      <img src="/static/images/vultr.jpg" alt="Vultr Cloud Hackathon">
+    <!-- Footer -->
+    <footer>
+      © 2025 Sourav Mandal | All Rights Reserved
+    </footer>
 
-    </div>
-  </section>
-  <!-- Chat Toggle Button -->
-  <button id="chat-toggle">💬</button>
-
-  <!-- Chat Widget -->
-<div id="chat-widget" style="display: none;">
-  <!-- Close Button -->
-  <button id="chat-close">×</button>
-
-  <!-- Chat Messages Area -->
-  <div id="chat-box">
-    <!-- Inline Chat Loading Spinner -->
-    <div id="chat-loading" class="spinner-container" style="display: none;">
-      <div class="spinner">
-        <div class="spinner1"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Chat Input -->
-  <div class="chat-input-container">
-    <input type="text" id="chat-input" placeholder="Ask me anything..." />
-    <button id="send-btn">Send</button>
-  </div>
-</div>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 Sourav Mandal | All Rights Reserved
-  </footer>
-
+  </div> <!-- End Barba Container -->
 
   <!-- Scripts -->
-  <script src="static/nav.js"></script>
-  <script>
-    // Smooth page transitions
-    document.querySelectorAll("a[href]").forEach(link => {
-      const url = new URL(link.href);
-      if (url.origin === location.origin && !link.href.includes("#")) {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          document.body.classList.remove("visible");
-          setTimeout(() => window.location = link.href, 300);
-        });
-      }
-    });
-  </script>
-  <script src="static/chat.js"></script>
+  <script src="/static/nav.js"></script>
+  <script src="/static/chat.js"></script>
+  <script src="{{ url_for('static', filename='barba.js') }}"></script>
 
 </body>
 
