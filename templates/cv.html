@@ -2,98 +2,96 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My CV | Sourav Mandal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My CV | Sourav Mandal</title>
 
-  <!-- GSAP & Barba -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://unpkg.com/@barba/core"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+    <!-- GSAP + Barba.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
 </head>
 
 <body class="fade" data-barba="wrapper">
-
-  <!-- ✅ Navbar (outside barba container) -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <label class="hamburger" id="navToggle">
-        <input type="checkbox" id="hamburgerCheckbox">
-        <svg viewBox="0 0 32 32">
-          <path class="line line-top-bottom"
-            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
-          </path>
-          <path class="line" d="M7 16 27 16"></path>
-        </svg>
-      </label>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('about') }}">About</a></li>
-        <li><a href="{{ url_for('projects') }}">Projects</a></li>
-        <li><a href="{{ url_for('certifications') }}">Certifications</a></li>
-        <li><a href="{{ url_for('cv') }}">CV</a></li>
-        <li><a href="{{ url_for('contact') }}">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- ✅ Barba container -->
-  <div data-barba="container" data-barba-namespace="cv">
-
-    <!-- Theme Toggle -->
-    <div class="toggle-container">
-      <input type="checkbox" class="l" id="themeToggle" />
-    </div>
-
-    <!-- CV Section -->
-    <section class="cv-section">
-      <h2>My CV</h2>
-      <p class="cv-description">View or download my resume below:</p>
-
-      <div class="cv-buttons">
-        <a href="/static/files/Sourav_Mandal_CV.pdf" class="btn" download>⬇ Download PDF</a>
-        <a href="/static/files/Sourav_Mandal_CV.pdf" class="btn secondary" target="_blank">📄 View in New Tab</a>
-      </div>
-
-      <div class="cv-preview">
-        <iframe src="/static/files/Sourav_Mandal_CV.pdf" frameborder="0" width="100%" height="600px"
-          style="max-width: 900px; margin: auto; display: block;"></iframe>
-      </div>
-    </section>
-
-    <!-- Chat Toggle Button -->
-    <button id="chat-toggle">💬</button>
-
-    <!-- Chat Widget -->
-    <div id="chat-widget" style="display: none;">
-      <button id="chat-close">×</button>
-      <div id="chat-box">
-        <div id="chat-loading" class="spinner-container" style="display: none;">
-          <div class="spinner">
-            <div class="spinner1"></div>
-          </div>
+    <main data-barba="container" data-barba-namespace="cv">
+        <!-- 🔘 Theme Toggle -->
+        <div class="toggle-container animate-item">
+            <input type="checkbox" class="l" id="themeToggle" />
         </div>
-      </div>
-      <div class="chat-input-container">
-        <input type="text" id="chat-input" placeholder="Ask me anything..." />
-        <button id="send-btn">Send</button>
-      </div>
-    </div>
 
-    <!-- Footer -->
-    <footer>
-      © 2025 Sourav Mandal | All Rights Reserved
-    </footer>
+        <!-- 🔗 Navbar -->
+        <nav class="navbar animate-item">
+            <div class="nav-container">
+                <!-- Hamburger Menu -->
+                <label class="hamburger animate-item" id="navToggle">
+                    <input type="checkbox" id="hamburgerCheckbox" />
+                    <svg viewBox="0 0 32 32">
+                        <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+                        <path class="line" d="M7 16 27 16"></path>
+                    </svg>
+                </label>
 
-  </div> <!-- End Barba Container -->
+                <ul class="nav-links" id="navLinks">
+                    <li class="animate-item"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li class="animate-item"><a href="{{ url_for('about') }}">About</a></li>
+                    <li class="animate-item"><a href="{{ url_for('projects') }}">Projects</a></li>
+                    <li class="animate-item"><a href="{{ url_for('certifications') }}">Certifications</a></li>
+                    <li class="animate-item"><a href="{{ url_for('cv') }}">CV</a></li>
+                    <li class="animate-item"><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
 
-  <!-- Scripts -->
-  <script src="/static/nav.js"></script>
-  <script src="/static/chat.js"></script>
-  <script src="{{ url_for('static', filename='barba.js') }}"></script>
+        <!-- 📄 CV Section -->
+        <section class="cv-section animate-item">
+            <h2 class="heading animate-item">My CV</h2>
+            <p class="cv-description animate-item">View or download my resume below:</p>
 
+            <div class="cv-buttons animate-item">
+                <a href="/static/files/Sourav_Mandal_CV.pdf" class="btn animate-item" download>⬇ Download PDF</a>
+                <a href="/static/files/Sourav_Mandal_CV.pdf" class="btn secondary animate-item" target="_blank">📄 View in New Tab</a>
+            </div>
+
+            <div class="cv-preview animate-item">
+                <iframe src="/static/files/Sourav_Mandal_CV.pdf" frameborder="0" width="100%" height="600px"
+                    style="max-width: 900px; margin: auto; display: block;"></iframe>
+            </div>
+        </section>
+
+        <!-- 💬 Chat Toggle Button -->
+        <button id="chat-toggle" class="animate-item">💬</button>
+
+        <!-- 💬 Chat Widget -->
+        <div id="chat-widget" class="animate-item" style="display: none;">
+            <button id="chat-close" class="animate-item">×</button>
+
+            <div id="chat-box">
+                <div id="chat-loading" class="spinner-container" style="display: none;">
+                    <div class="spinner"><div class="spinner1"></div></div>
+                </div>
+            </div>
+
+            <div class="chat-input-container animate-item">
+                <input type="text" id="chat-input" placeholder="Ask me anything..." class="animate-item" />
+                <button id="send-btn" class="btn animate-item">Send</button>
+            </div>
+        </div>
+
+        <!-- 📜 Footer -->
+        <footer class="animate-item">
+            <p class="animate-item">© 2025 Sourav Mandal | All Rights Reserved</p>
+        </footer>
+
+    </main>
+
+    <!-- JS Files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.2/browser/pixi.min.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
-
 </html>

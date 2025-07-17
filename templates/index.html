@@ -2,106 +2,103 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sourav Mandal | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sourav Mandal | Portfolio</title>
 
-  <!-- GSAP + Barba -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://unpkg.com/@barba/core"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+    <!-- GSAP & Barba CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
 </head>
 
 <body class="fade" data-barba="wrapper">
-
-  <!-- ✅ Fixed Navbar OUTSIDE Barba container -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <label class="hamburger" id="navToggle">
-        <input type="checkbox" id="hamburgerCheckbox">
-        <svg viewBox="0 0 32 32">
-          <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
-          <path class="line" d="M7 16 27 16"></path>
-        </svg>
-      </label>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('about') }}">About</a></li>
-        <li><a href="{{ url_for('projects') }}">Projects</a></li>
-        <li><a href="{{ url_for('certifications') }}">Certifications</a></li>
-        <li><a href="{{ url_for('cv') }}">CV</a></li>
-        <li><a href="{{ url_for('contact') }}">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- ✅ Barba container for animated content -->
-  <div data-barba="container" data-barba-namespace="home">
-
-    <!-- Toggle container -->
-    <div class="toggle-container">
-      <input type="checkbox" class="l" id="themeToggle" />
-    </div>
-
-    <!-- Hero Section -->
-    <header class="hero">
-      <div class="card">
-        <div class="card2">
-          <img src="static/images/profile.jpg" alt="Sourav Mandal" class="profile-pic" />
+    <main data-barba="container" data-barba-namespace="home">
+        <!-- 🌗 Theme Toggle -->
+        <div class="toggle-container animate-item">
+            <input type="checkbox" class="l" id="themeToggle" />
         </div>
-      </div>
 
-      <h1 class="glow-heading" data-text="Sourav Mandal">Sourav Mandal</h1>
-      <p class="tagline">Crafting smart solutions with AI, ML & Web</p>
-      <p>Welcome to my portfolio! Explore my work, projects, and background using the menu above.</p>
+        <!-- 🔗 Navbar -->
+        <nav class="navbar animate-item">
+            <div class="nav-container">
+                <label class="hamburger animate-item" id="navToggle">
+                    <input type="checkbox" id="hamburgerCheckbox">
+                    <svg viewBox="0 0 32 32">
+                        <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+                        <path class="line" d="M7 16 27 16"></path>
+                    </svg>
+                </label>
+                <ul class="nav-links" id="navLinks">
+                    <li class="animate-item"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li class="animate-item"><a href="{{ url_for('about') }}">About</a></li>
+                    <li class="animate-item"><a href="{{ url_for('projects') }}">Projects</a></li>
+                    <li class="animate-item"><a href="{{ url_for('certifications') }}">Certifications</a></li>
+                    <li class="animate-item"><a href="{{ url_for('cv') }}">CV</a></li>
+                    <li class="animate-item"><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
 
-      <div class="cta-buttons">
-        <a href="/projects">
-          <button><span>View Projects</span></button>
-        </a>
-        <a href="/contact">
-          <button><span>Hire Me</span></button>
-        </a>
-      </div>
+        <!-- 👋 Hero Section -->
+        <header class="hero animate-item">
+            <div class="card animate-item">
+                <div class="card2">
+                    <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Sourav Mandal" class="profile-pic animate-item" />
+                </div>
+            </div>
 
-      <div class="stats">
-        <div><strong>10+</strong> Projects</div>
-        <div><strong>5+</strong> Certifications</div>
-        <div><strong>3</strong> Fields: AI/ML, Web, Disaster Tech</div>
-      </div>
-    </header>
+            <h1 class="glow-heading animate-item" data-text="Sourav Mandal">Sourav Mandal</h1>
+            <p class="tagline animate-item">Crafting smart solutions with AI, ML & Web</p>
+            <p class="animate-item">Welcome to my portfolio! Explore my work, projects, and background using the menu above.</p>
 
-    <!-- Chat Toggle Button -->
-    <button id="chat-toggle">💬</button>
+            <div class="cta-buttons animate-item">
+                <a href="{{ url_for('projects') }}" class="animate-item">
+                    <button class="animate-item"><span>View Projects</span></button>
+                </a>
+                <a href="{{ url_for('contact') }}" class="animate-item">
+                    <button class="animate-item"><span>Hire Me</span></button>
+                </a>
+            </div>
 
-    <!-- Chat Widget -->
-    <div id="chat-widget" style="display: none;">
-      <button id="chat-close">×</button>
-      <div id="chat-box">
-        <div id="chat-loading" class="spinner-container" style="display: none;">
-          <div class="spinner">
-            <div class="spinner1"></div>
-          </div>
+            <div class="stats">
+                <div class="animate-item"><strong>10+</strong> Projects</div>
+                <div class="animate-item"><strong>5+</strong> Certifications</div>
+                <div class="animate-item"><strong>3</strong> Fields: AI/ML, Web, Disaster Tech</div>
+            </div>
+        </header>
+
+        <!-- 💬 Chat Widget -->
+        <button id="chat-toggle" class="animate-item">💬</button>
+
+        <div id="chat-widget" class="animate-item" style="display: none;">
+            <button id="chat-close" class="animate-item">×</button>
+            <div id="chat-box">
+                <div id="chat-loading" class="spinner-container" style="display: none;">
+                    <div class="spinner"><div class="spinner1"></div></div>
+                </div>
+            </div>
+            <div class="chat-input-container animate-item">
+                <input type="text" id="chat-input" placeholder="Ask me anything..." class="animate-item" />
+                <button id="send-btn" class="btn animate-item">Send</button>
+            </div>
         </div>
-      </div>
-      <div class="chat-input-container">
-        <input type="text" id="chat-input" placeholder="Ask me anything..." />
-        <button id="send-btn">Send</button>
-      </div>
-    </div>
 
-    <!-- Footer -->
-    <footer>
-      © 2025 Sourav Mandal | All Rights Reserved
-    </footer>
+        <!-- 📜 Footer -->
+        <footer class="animate-item">
+            <p class="animate-item">© 2025 Sourav Mandal | All Rights Reserved</p>
+        </footer>
 
-  </div> <!-- END BARBA CONTAINER -->
+    </main>
 
-  <!-- Scripts -->
-  <script src="/static/nav.js"></script>
-  <script src="/static/chat.js"></script>
-  <script src="{{ url_for('static', filename='barba.js') }}"></script>
-
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.2/browser/pixi.min.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>
