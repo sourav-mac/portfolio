@@ -322,6 +322,11 @@ footer {
   .hero {
     padding: 6rem 1rem 3rem;
     min-height: 90vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero h1 {
@@ -406,6 +411,15 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .hero {
+    padding: 4rem 1rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .hero h1 {
     font-size: 1.8rem;
   }
@@ -435,6 +449,14 @@ footer {
   .card {
     width: 210px;
     height: 210px;
+    margin: 0 auto 2rem auto;
+    display: block;
+  }
+
+  .card2 {
+    width: 210px;
+    height: 210px;
+    margin: 0 auto;
   }
 
   .stats strong {
