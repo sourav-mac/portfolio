@@ -8,7 +8,8 @@
     <title>Certifications | Sourav Mandal</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600;800&display=swap"
+        rel="stylesheet" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
@@ -19,11 +20,34 @@
 </head>
 
 <body class="fade" data-barba="wrapper">
-    <main data-barba="container" data-barba-namespace="certifications">
-        <!-- 🔘 Theme Toggle -->
-        <div class="toggle-container animate-item">
-            <input type="checkbox" class="l" id="themeToggle" />
+    <!-- Page Transition Layer -->
+    <div class="transition">
+        <div class="transition__background"></div>
+        <div class="transition__text">Loading...</div>
+    </div>
+
+    <!-- 🌗 Theme Toggle - Outside Barba Container -->
+    <div class="toggle-container animate-item">
+        <input type="checkbox" class="l" id="themeToggle" />
+    </div>
+
+    <!-- 💬 Chat Widget - Outside Barba Container -->
+    <button id="chat-toggle" class="animate-item">💬</button>
+
+    <div id="chat-widget" class="animate-item" style="display: none;">
+        <button id="chat-close" class="animate-item">×</button>
+        <div id="chat-box">
+            <div id="chat-loading" class="spinner-container" style="display: none;">
+                <div class="spinner"><div class="spinner1"></div></div>
+            </div>
         </div>
+        <div class="chat-input-container animate-item">
+            <input type="text" id="chat-input" placeholder="Ask me anything..." class="animate-item" />
+            <button id="send-btn" class="btn animate-item">Send</button>
+        </div>
+    </div>
+
+    <main data-barba="container" data-barba-namespace="certifications">
 
         <!-- 🔗 Navbar -->
         <nav class="navbar animate-item">
@@ -32,7 +56,9 @@
                 <label class="hamburger animate-item" id="navToggle">
                     <input type="checkbox" id="hamburgerCheckbox">
                     <svg viewBox="0 0 32 32">
-                        <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+                        <path class="line line-top-bottom"
+                            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+                        </path>
                         <path class="line" d="M7 16 27 16"></path>
                     </svg>
                 </label>
@@ -49,45 +75,39 @@
         </nav>
 
         <!-- 🧾 Certifications Section -->
-        <section class="cert-section animate-item">
-            <div class="cert-text">
-                <h2 class="heading animate-item">My Certifications</h2>
-                <div class="cert-list">
-                    <p class="animate-item">📘 <strong>Data Structures</strong> – University of California San Diego (Coursera)</p>
-                    <p class="animate-item">📝 <strong>Teach English Now!</strong> – Arizona State University (Coursera)</p>
-                    <p class="animate-item">🏆 <strong>Hackathon Finisher</strong> – TechnoFunda Investing Academy</p>
-                    <p class="animate-item">🧠 <strong>Soft Skills & People Management</strong> – IBM (Coursera)</p>
-                    <p class="animate-item">🌩️ <strong>Vultr Cloud Hackathon</strong> – GeeksforGeeks & Vultr</p>
-                </div>
-            </div>
+        <section class="animate-item">
+            <h2 class="animate-item">My Certifications</h2>
+            <div class="cert-content">
 
-            <div class="gallery">
-                <img src="/static/images/COURSE datastr.jpg" alt="Data Structure Certificate" class="animate-item">
-                <img src="/static/images/COURSE english.jpg" alt="Teach English Now" class="animate-item">
-                <img src="/static/images/Technofunda.jpg" alt="TechnoFunda" class="animate-item">
-                <img src="/static/images/Coursera.jpg" alt="Soft Skills & People Management" class="animate-item">
-                <img src="/static/images/vultr.jpg" alt="Vultr Cloud Hackathon" class="animate-item">
+                <div class="cert-item animate-item">
+                    <p>📘 <strong>Data Structures</strong> – University of California San Diego (Coursera)</p>
+                    <img src="/static/images/COURSE datastr.jpg" alt="Data Structure Certificate" class="cert-image">
+                </div>
+
+                <div class="cert-item animate-item">
+                    <p>📝 <strong>Teach English Now!</strong> – Arizona State University (Coursera)</p>
+                    <img src="/static/images/COURSE english.jpg" alt="Teach English Now" class="cert-image">
+                </div>
+
+                <div class="cert-item animate-item">
+                    <p>🚀 <strong>Hackathon Finisher</strong> – TechnoFunda Investing Academy</p>
+                    <img src="/static/images/Technofunda.jpg" alt="TechnoFunda" class="cert-image">
+                </div>
+
+                <div class="cert-item animate-item">
+                    <p>🧠 <strong>Soft Skills & People Management</strong> – IBM (Coursera)</p>
+                    <img src="/static/images/Coursera.jpg" alt="Soft Skills & People Management" class="cert-image">
+                </div>
+
+                <div class="cert-item animate-item">
+                    <p>🌩️ <strong>Vultr Cloud Hackathon</strong> – GeeksforGeeks & Vultr</p>
+                    <img src="/static/images/vultr.jpg" alt="Vultr Cloud Hackathon" class="cert-image">
+                </div>
+
             </div>
         </section>
 
-        <!-- 💬 Chat Toggle -->
-        <button id="chat-toggle" class="animate-item">💬</button>
-
-        <!-- 💬 Chat Widget -->
-        <div id="chat-widget" class="animate-item" style="display: none;">
-            <button id="chat-close">×</button>
-            <div id="chat-box">
-                <div id="chat-loading" class="spinner-container" style="display: none;">
-                    <div class="spinner"><div class="spinner1"></div></div>
-                </div>
-            </div>
-            <div class="chat-input-container">
-                <input type="text" id="chat-input" placeholder="Ask me anything..." />
-                <button id="send-btn" class="btn animate-item">Send</button>
-            </div>
-        </div>
-
-        <!-- 📜 Footer -->
+        <!--  Footer -->
         <footer class="animate-item">
             <p class="animate-item">© 2025 Sourav Mandal | All Rights Reserved</p>
         </footer>
@@ -100,4 +120,5 @@
     <script src="{{ url_for('static', filename='chat.js') }}"></script>
 
 </body>
+
 </html>

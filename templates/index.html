@@ -19,11 +19,34 @@
 </head>
 
 <body class="fade" data-barba="wrapper">
-    <main data-barba="container" data-barba-namespace="home">
-        <!-- 🌗 Theme Toggle -->
-        <div class="toggle-container animate-item">
-            <input type="checkbox" class="l" id="themeToggle" />
+    <!-- Page Transition Layer -->
+    <div class="transition">
+        <div class="transition__background"></div>
+        <div class="transition__text">Loading...</div>
+    </div>
+    
+    <!-- 🌗 Theme Toggle - Outside Barba Container -->
+    <div class="toggle-container animate-item">
+        <input type="checkbox" class="l" id="themeToggle" />
+    </div>
+
+    <!-- 💬 Chat Widget - Outside Barba Container -->
+    <button id="chat-toggle" class="animate-item">💬</button>
+
+    <div id="chat-widget" class="animate-item" style="display: none;">
+        <button id="chat-close" class="animate-item">×</button>
+        <div id="chat-box">
+            <div id="chat-loading" class="spinner-container" style="display: none;">
+                <div class="spinner"><div class="spinner1"></div></div>
+            </div>
         </div>
+        <div class="chat-input-container animate-item">
+            <input type="text" id="chat-input" placeholder="Ask me anything..." class="animate-item" />
+            <button id="send-btn" class="btn animate-item">Send</button>
+        </div>
+    </div>
+    
+    <main data-barba="container" data-barba-namespace="home">
 
         <!-- 🔗 Navbar -->
         <nav class="navbar animate-item">
@@ -54,43 +77,35 @@
                 </div>
             </div>
 
-            <h1 class="glow-heading animate-item" data-text="Sourav Mandal">Sourav Mandal</h1>
-            <p class="tagline animate-item">Crafting smart solutions with AI, ML & Web</p>
-            <p class="animate-item">Welcome to my portfolio! Explore my work, projects, and background using the menu above.</p>
+            <h1 class="animate-item">Create badass, AI-powered solutions with precision and passion.</h1>
+            <p class="tagline animate-item">I'm Sourav Mandal, crafting intelligent solutions with AI, ML & Modern Web Technologies</p>
 
             <div class="cta-buttons animate-item">
-                <a href="{{ url_for('projects') }}" class="animate-item">
-                    <button class="animate-item"><span>View Projects</span></button>
+                <a href="{{ url_for('projects') }}" class="btn animate-item">
+                    View Projects
                 </a>
-                <a href="{{ url_for('contact') }}" class="animate-item">
-                    <button class="animate-item"><span>Hire Me</span></button>
+                <a href="{{ url_for('contact') }}" class="btn secondary animate-item">
+                    Hire Me
                 </a>
             </div>
 
             <div class="stats">
-                <div class="animate-item"><strong>10+</strong> Projects</div>
-                <div class="animate-item"><strong>5+</strong> Certifications</div>
-                <div class="animate-item"><strong>3</strong> Fields: AI/ML, Web, Disaster Tech</div>
+                <div class="animate-item">
+                    <strong>10+</strong>
+                    <span>Projects</span>
+                </div>
+                <div class="animate-item">
+                    <strong>5+</strong>
+                    <span>Certifications</span>
+                </div>
+                <div class="animate-item">
+                    <strong>3</strong>
+                    <span>Tech Fields</span>
+                </div>
             </div>
         </header>
 
-        <!-- 💬 Chat Widget -->
-        <button id="chat-toggle" class="animate-item">💬</button>
-
-        <div id="chat-widget" class="animate-item" style="display: none;">
-            <button id="chat-close" class="animate-item">×</button>
-            <div id="chat-box">
-                <div id="chat-loading" class="spinner-container" style="display: none;">
-                    <div class="spinner"><div class="spinner1"></div></div>
-                </div>
-            </div>
-            <div class="chat-input-container animate-item">
-                <input type="text" id="chat-input" placeholder="Ask me anything..." class="animate-item" />
-                <button id="send-btn" class="btn animate-item">Send</button>
-            </div>
-        </div>
-
-        <!-- 📜 Footer -->
+        <!--  Footer -->
         <footer class="animate-item">
             <p class="animate-item">© 2025 Sourav Mandal | All Rights Reserved</p>
         </footer>

@@ -44,6 +44,110 @@ function initNavigation() {
     });
 }
 
+// ===============================
+// Floating Elements Handler
+// ===============================
+function ensureFloatingElements() {
+    // Ensure floating elements stay fixed and visible
+    const chatToggle = document.getElementById("chat-toggle");
+    const chatWidget = document.getElementById("chat-widget");
+    const toggleContainer = document.querySelector(".toggle-container");
+    
+    if (chatToggle) {
+        // Only set visibility if the element is not intentionally hidden
+        if (chatToggle.style.display !== "none") {
+            chatToggle.style.cssText = `
+                position: fixed !important;
+                bottom: 20px !important;
+                right: 20px !important;
+                z-index: 10001 !important;
+                pointer-events: auto !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            `;
+        } else {
+            // Keep position fixed but allow display: none
+            chatToggle.style.cssText = `
+                position: fixed !important;
+                bottom: 20px !important;
+                right: 20px !important;
+                z-index: 10001 !important;
+                display: none !important;
+            `;
+        }
+    }
+    
+    if (chatWidget) {
+        // Only ensure positioning, don't force visibility for chat widget
+        const currentDisplay = chatWidget.style.display;
+        chatWidget.style.cssText = `
+            position: fixed !important;
+            bottom: 80px !important;
+            right: 20px !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            ${currentDisplay ? `display: ${currentDisplay} !important;` : 'display: none !important;'}
+        `;
+        
+        // If it should be visible, ensure opacity and visibility
+        if (currentDisplay === 'flex' || currentDisplay === 'block') {
+            chatWidget.style.opacity = '1';
+            chatWidget.style.visibility = 'visible';
+        }
+    }
+    
+    if (toggleContainer) {
+        toggleContainer.style.cssText = `
+            position: fixed !important;
+            top: 20px !important;
+            right: 20px !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        `;
+    }
+}
+
+
+// ===============================
+// Page Transition Animation
+// ===============================
+function startPageTransition(callback) {
+    const transition = document.querySelector('.transition');
+    const bg = transition.querySelector('.transition__background');
+    const text = transition.querySelector('.transition__text');
+
+    if (!transition || !bg) return;
+
+    transition.classList.add('is-animating');
+    
+    // Animate text after background starts sliding
+    setTimeout(() => {
+        if (text) text.style.opacity = '1';
+    }, 200);
+
+    // Wait for CSS transition to finish (duration: 0.8s)
+    setTimeout(() => {
+        if (typeof callback === 'function') callback();
+        endPageTransition();
+    }, 800);
+}
+
+function endPageTransition() {
+    const transition = document.querySelector('.transition');
+    const text = transition.querySelector('.transition__text');
+    
+    if (!transition) return;
+    
+    // Fade out text first
+    if (text) text.style.opacity = '0';
+    
+    // Then slide out the background
+    setTimeout(() => {
+        transition.classList.remove('is-animating');
+    }, 200);
+}
 
 // ===============================
 // Slide Transition Setup
@@ -212,7 +316,7 @@ barba.hooks.after(() => {
 
 // Update the barba.init configuration:
 barba.init({
-    debug: true,
+    debug: false,
     timeout: 5000,
     prevent: ({ el }) => {
         return (
@@ -225,12 +329,13 @@ barba.init({
         );
     },
     transitions: [{
-        name: 'element-cascade-transition',
+        name: 'slide-transition',
         sync: false,
 
         beforeOnce() {
             initNavigation();
             initChatWidget();
+            ensureFloatingElements();
         },
 
         beforeLeave() {
@@ -246,13 +351,22 @@ barba.init({
         },
 
         async leave(data) {
-            const elements = slideTransition.prepareElements(data.current.container);
-            if (elements) {
-                await slideTransition.animateOut(elements);
-            }
+            // Start the sliding transition
+            return new Promise((resolve) => {
+                startPageTransition(() => {
+                    // Animate out existing elements
+                    const elements = slideTransition.prepareElements(data.current.container);
+                    if (elements) {
+                        slideTransition.animateOut(elements).then(resolve);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
         },
 
         async enter(data) {
+            // Animate in new elements
             const elements = slideTransition.prepareElements(data.next.container);
             if (elements) {
                 await slideTransition.animateIn(elements);
@@ -266,6 +380,8 @@ barba.init({
             setTimeout(() => {
                 initNavigation();
                 initChatWidget();
+                ensureFloatingElements();
+                initManualTransitions();
                 
                 // Restore theme state
                 const themeToggle = document.getElementById("themeToggle");
@@ -287,12 +403,42 @@ barba.init({
     }]
 });
 // ===============================
+// Manual Navigation Handler (Fallback)
+// ===============================
+function initManualTransitions() {
+    // Handle navigation links manually as fallback
+    document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"])').forEach(link => {
+        if (!link.dataset.manualTransition) {
+            link.dataset.manualTransition = 'true';
+            
+            link.addEventListener('click', function(e) {
+                // Only handle if Barba.js hasn't already handled it
+                if (!e.defaultPrevented && !this.classList.contains('prevent-barba')) {
+                    const href = this.getAttribute('href');
+                    if (href && href !== window.location.pathname) {
+                        e.preventDefault();
+                        startPageTransition(() => {
+                            window.location.href = href;
+                        });
+                    }
+                }
+            });
+        }
+    });
+}
+
+// ===============================
 // Initialize Everything
 // ===============================
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initChatWidget();
+    ensureFloatingElements();
+    initManualTransitions();
     document.body.classList.add('visible');
+    
+    // Run floating elements check less frequently to avoid interference
+    setInterval(ensureFloatingElements, 5000);
 });
 
 // Handle cleanup before unload

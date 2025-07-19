@@ -19,11 +19,34 @@
 </head>
 
 <body class="fade" data-barba="wrapper">
-    <main data-barba="container" data-barba-namespace="contact">
-        <!-- 🔘 Theme Toggle -->
-        <div class="toggle-container animate-item">
-            <input type="checkbox" class="l" id="themeToggle" />
+    <!-- Page Transition Layer -->
+    <div class="transition">
+        <div class="transition__background"></div>
+        <div class="transition__text">Loading...</div>
+    </div>
+    
+    <!-- 🌗 Theme Toggle - Outside Barba Container -->
+    <div class="toggle-container animate-item">
+        <input type="checkbox" class="l" id="themeToggle" />
+    </div>
+
+    <!-- 💬 Chat Widget - Outside Barba Container -->
+    <button id="chat-toggle" class="animate-item">💬</button>
+
+    <div id="chat-widget" class="animate-item" style="display: none;">
+        <button id="chat-close" class="animate-item">×</button>
+        <div id="chat-box">
+            <div id="chat-loading" class="spinner-container" style="display: none;">
+                <div class="spinner"><div class="spinner1"></div></div>
+            </div>
         </div>
+        <div class="chat-input-container animate-item">
+            <input type="text" id="chat-input" placeholder="Ask me anything..." class="animate-item" />
+            <button id="send-btn" class="btn animate-item">Send</button>
+        </div>
+    </div>
+    
+    <main data-barba="container" data-barba-namespace="contact">
 
         <!-- 🔗 Navbar -->
         <nav class="navbar animate-item">
@@ -58,26 +81,7 @@
             <p class="animate-item">📸 Instagram: <a href="https://www.instagram.com/sourav_2002_14/profilecard/?igsh=cnd5cHB0dGpwazRv" target="_blank">My Account</a></p>
         </section>
 
-        <!-- 💬 Chat Toggle -->
-        <button id="chat-toggle" class="animate-item">💬</button>
-
-        <!-- 💬 Chat Widget -->
-        <div id="chat-widget" class="animate-item" style="display: none;">
-            <button id="chat-close" class="animate-item">×</button>
-
-            <div id="chat-box">
-                <div id="chat-loading" class="spinner-container" style="display: none;">
-                    <div class="spinner"><div class="spinner1"></div></div>
-                </div>
-            </div>
-
-            <div class="chat-input-container animate-item">
-                <input type="text" id="chat-input" placeholder="Ask me anything..." class="animate-item" />
-                <button id="send-btn" class="btn animate-item">Send</button>
-            </div>
-        </div>
-
-        <!-- 📜 Footer -->
+        <!--  Footer -->
         <footer class="animate-item">
             <p class="animate-item">&copy; 2025 Sourav Mandal | All Rights Reserved</p>
         </footer>
