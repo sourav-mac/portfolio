@@ -150,27 +150,91 @@ function endPageTransition() {
 }
 
 // ===============================
-// Slide Transition Setup
+// Smart Transition Setup
 // ===============================
-class SlideTransition {
+class SmartTransition {
     constructor() {
+        this.setupStyles();
+    }
+
+    setupStyles() {
         const style = document.createElement('style');
         style.textContent = `
             [data-barba="container"] {
                 position: relative;
-                overflow: hidden;
+                opacity: 1;
+                transform: none;
+                transition: all 0.6s ease-in-out;
             }
+            
+            html.is-transitioning [data-barba="container"] {
+                pointer-events: none;
+            }
+            
             .animate-item {
                 will-change: transform, opacity;
                 transform: translateX(0);
                 opacity: 1;
+                transition: opacity 0.6s ease, transform 0.6s ease;
             }
+            
             html.is-transitioning {
                 overflow: hidden;
             }
+            
             html.is-transitioning body {
                 cursor: wait;
             }
+            
+            /* Smart transition overlay */
+            .smart-transition-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, var(--bg-color) 0%, rgba(17, 17, 17, 0.95) 100%);
+                z-index: 9999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease-in-out;
+            }
+            
+            .smart-transition-overlay.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+            
+            .smart-transition-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                color: var(--text-color);
+            }
+            
+            .smart-transition-spinner {
+                width: 40px;
+                height: 40px;
+                border: 3px solid rgba(99, 102, 241, 0.3);
+                border-top: 3px solid var(--accent-color);
+                border-radius: 50%;
+                animation: smartSpin 1s linear infinite;
+                margin: 0 auto 1rem;
+            }
+            
+            @keyframes smartSpin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            
+            .smart-transition-text {
+                font-size: 1rem;
+                opacity: 0.8;
+                font-weight: 500;
+            }
+            
             .heading, h1, h2, h3,
             .profile-pic,
             .project-card,
@@ -186,122 +250,213 @@ class SlideTransition {
             }
         `;
         document.head.appendChild(style);
+        
+        // Create overlay element
+        this.createOverlay();
+    }
+    
+    createOverlay() {
+        if (document.querySelector('.smart-transition-overlay')) return;
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'smart-transition-overlay';
+        overlay.innerHTML = `
+            <div class="smart-transition-content">
+                <div class="smart-transition-spinner"></div>
+                <div class="smart-transition-text">Loading...</div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    }
+
+    getTransitionType(currentNamespace, nextNamespace) {
+        // Smart transition logic based on page types
+        const transitions = {
+            'home-to-about': 'slideRight',
+            'about-to-projects': 'slideRight', 
+            'projects-to-certifications': 'slideRight',
+            'certifications-to-cv': 'slideRight',
+            'cv-to-contact': 'slideRight',
+            'contact-to-home': 'fadeScale',
+            // Reverse transitions
+            'about-to-home': 'slideLeft',
+            'projects-to-about': 'slideLeft',
+            'certifications-to-projects': 'slideLeft',
+            'cv-to-certifications': 'slideLeft',
+            'contact-to-cv': 'slideLeft',
+            // Non-sequential transitions
+            'home-to-projects': 'fadeUp',
+            'home-to-contact': 'fadeDown',
+            'projects-to-contact': 'fadeScale'
+        };
+        
+        const transitionKey = `${currentNamespace}-to-${nextNamespace}`;
+        return transitions[transitionKey] || 'fade';
     }
 
     prepareElements(container) {
         if (!container) return null;
         return {
             headings: container.querySelectorAll('h1, h2, h3, .heading'),
-            images: container.querySelectorAll('img, .profile-pic, .gallery img'),
-            cards: container.querySelectorAll('.project-card, section'),
-            buttons: container.querySelectorAll('.btn, .cta-buttons button'),
-            paragraphs: container.querySelectorAll('p'),
+            paragraphs: container.querySelectorAll('p:not(.animate-item p)'),
+            cards: container.querySelectorAll('.project-card, .cert-item, .cv-buttons'),
+            images: container.querySelectorAll('img, .profile-pic, .cert-image'),
+            buttons: container.querySelectorAll('.btn, .cta-buttons a'),
             stats: container.querySelectorAll('.stats div'),
-            nav: container.querySelectorAll('.nav-links li')
+            nav: container.querySelectorAll('.nav-links li'),
+            sections: container.querySelectorAll('section, .hero, .about-section'),
+            container: container
         };
     }
 
-    async animateOut(elements, direction = 1) {
+    async animateOut(elements, transitionType = 'fade') {
         if (!elements) return;
-        const xOffset = direction * 100;
+        
+        const overlay = document.querySelector('.smart-transition-overlay');
+        if (overlay) {
+            overlay.classList.add('active');
+        }
+        
         const tl = gsap.timeline({
             defaults: {
-                duration: 0.4,
+                duration: 0.5,
                 ease: 'power2.inOut'
             }
         });
 
-        const animations = [
-            { items: elements.headings, delay: 0 },
-            { items: elements.images, delay: 0.1 },
-            { items: elements.cards, delay: 0.2 },
-            { items: elements.paragraphs, delay: 0.15 },
-            { items: elements.buttons, delay: 0.25 },
-            { items: elements.stats, delay: 0.2 }
-        ];
+        // Different animation patterns based on transition type
+        switch (transitionType) {
+            case 'slideRight':
+                return this.slideOutRight(elements, tl);
+            case 'slideLeft': 
+                return this.slideOutLeft(elements, tl);
+            case 'fadeUp':
+                return this.fadeOutUp(elements, tl);
+            case 'fadeDown':
+                return this.fadeOutDown(elements, tl);
+            case 'fadeScale':
+                return this.fadeOutScale(elements, tl);
+            default:
+                return this.fadeOut(elements, tl);
+        }
+    }
 
-        animations.forEach(({ items, delay }) => {
-            if (items?.length) {
-                tl.to(items, {
-                    x: `${-xOffset}%`,
-                    opacity: 0,
-                    stagger: 0.03
-                }, delay);
+    async animateIn(elements, transitionType = 'fade') {
+        if (!elements) return;
+        
+        const overlay = document.querySelector('.smart-transition-overlay');
+        
+        const tl = gsap.timeline({
+            defaults: {
+                duration: 0.6,
+                ease: 'power2.out'
+            },
+            onComplete: () => {
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
             }
         });
 
-        if (elements.nav?.length) {
-            tl.to(elements.nav, {
-                y: -20,
-                opacity: 0,
-                stagger: 0.02
-            }, 0);
+        // Different animation patterns based on transition type
+        switch (transitionType) {
+            case 'slideRight':
+                return this.slideInRight(elements, tl);
+            case 'slideLeft':
+                return this.slideInLeft(elements, tl);
+            case 'fadeUp':
+                return this.fadeInUp(elements, tl);
+            case 'fadeDown':
+                return this.fadeInDown(elements, tl);
+            case 'fadeScale':
+                return this.fadeInScale(elements, tl);
+            default:
+                return this.fadeIn(elements, tl);
         }
+    }
 
+    // Slide Right Transitions
+    slideOutRight(elements, tl) {
+        tl.to(elements.container, { x: '-100%', opacity: 0.8 }, 0)
+          .to(elements.sections, { x: '-50px', opacity: 0, stagger: 0.1 }, 0.1);
         return tl;
     }
 
-    async animateIn(elements, direction = 1) {
-        if (!elements) return;
-        const xOffset = direction * 100;
-        const tl = gsap.timeline({
-            defaults: {
-                duration: 0.4,
-                ease: 'power2.out'
-            }
-        });
+    slideInRight(elements, tl) {
+        gsap.set(elements.container, { x: '100%', opacity: 0.8 });
+        gsap.set(elements.sections, { x: '50px', opacity: 0 });
+        
+        tl.to(elements.container, { x: '0%', opacity: 1 }, 0)
+          .to(elements.sections, { x: '0px', opacity: 1, stagger: 0.1 }, 0.2);
+        return tl;
+    }
 
-        // Set initial positions
-        const elementsToAnimate = [
-            { items: elements.headings, delay: 0 },
-            { items: elements.images, delay: 0.1 },
-            { items: elements.cards, delay: 0.2 },
-            { items: elements.paragraphs, delay: 0.15 },
-            { items: elements.buttons, delay: 0.25 },
-            { items: elements.stats, delay: 0.2 }
-        ];
+    // Slide Left Transitions  
+    slideOutLeft(elements, tl) {
+        tl.to(elements.container, { x: '100%', opacity: 0.8 }, 0)
+          .to(elements.sections, { x: '50px', opacity: 0, stagger: 0.1 }, 0.1);
+        return tl;
+    }
 
-        // Set initial states
-        elementsToAnimate.forEach(({ items }) => {
-            if (items?.length) {
-                gsap.set(items, {
-                    x: `${xOffset}%`,
-                    opacity: 0
-                });
-            }
-        });
+    slideInLeft(elements, tl) {
+        gsap.set(elements.container, { x: '-100%', opacity: 0.8 });
+        gsap.set(elements.sections, { x: '-50px', opacity: 0 });
+        
+        tl.to(elements.container, { x: '0%', opacity: 1 }, 0)
+          .to(elements.sections, { x: '0px', opacity: 1, stagger: 0.1 }, 0.2);
+        return tl;
+    }
 
-        if (elements.nav?.length) {
-            gsap.set(elements.nav, {
-                y: 20,
-                opacity: 0
-            });
-        }
+    // Fade Up Transitions
+    fadeOutUp(elements, tl) {
+        tl.to(elements.sections, { y: '-50px', opacity: 0, stagger: 0.05 }, 0);
+        return tl;
+    }
 
-        // Animate in
-        elementsToAnimate.forEach(({ items, delay }) => {
-            if (items?.length) {
-                tl.to(items, {
-                    x: 0,
-                    opacity: 1,
-                    stagger: 0.03
-                }, delay);
-            }
-        });
+    fadeInUp(elements, tl) {
+        gsap.set(elements.sections, { y: '50px', opacity: 0 });
+        tl.to(elements.sections, { y: '0px', opacity: 1, stagger: 0.1 }, 0);
+        return tl;
+    }
 
-        if (elements.nav?.length) {
-            tl.to(elements.nav, {
-                y: 0,
-                opacity: 1,
-                stagger: 0.02
-            }, 0.1);
-        }
+    // Fade Down Transitions
+    fadeOutDown(elements, tl) {
+        tl.to(elements.sections, { y: '50px', opacity: 0, stagger: 0.05 }, 0);
+        return tl;
+    }
 
+    fadeInDown(elements, tl) {
+        gsap.set(elements.sections, { y: '-50px', opacity: 0 });
+        tl.to(elements.sections, { y: '0px', opacity: 1, stagger: 0.1 }, 0);
+        return tl;
+    }
+
+    // Fade Scale Transitions
+    fadeOutScale(elements, tl) {
+        tl.to(elements.container, { scale: 0.9, opacity: 0 }, 0);
+        return tl;
+    }
+
+    fadeInScale(elements, tl) {
+        gsap.set(elements.container, { scale: 1.1, opacity: 0 });
+        tl.to(elements.container, { scale: 1, opacity: 1 }, 0);
+        return tl;
+    }
+
+    // Basic Fade Transitions
+    fadeOut(elements, tl) {
+        tl.to(elements.sections, { opacity: 0, stagger: 0.05 }, 0);
+        return tl;
+    }
+
+    fadeIn(elements, tl) {
+        gsap.set(elements.sections, { opacity: 0 });
+        tl.to(elements.sections, { opacity: 1, stagger: 0.1 }, 0);
         return tl;
     }
 }
 
-const slideTransition = new SlideTransition();
+const smartTransition = new SmartTransition();
 
 // ===============================
 // Barba.js Setup
@@ -329,17 +484,28 @@ barba.init({
         );
     },
     transitions: [{
-        name: 'slide-transition',
+        name: 'smart-transition',
         sync: false,
 
         beforeOnce() {
             initNavigation();
             initChatWidget();
             ensureFloatingElements();
+            
+            // Initialize animated background for all pages
+            if (typeof initAnimatedBackgroundOnAllPages !== 'undefined') {
+                initAnimatedBackgroundOnAllPages();
+            }
         },
 
-        beforeLeave() {
+        beforeLeave(data) {
             document.documentElement.classList.add('is-transitioning');
+            
+            // Store transition type based on current and next page
+            const currentNamespace = data.current.namespace;
+            const nextNamespace = data.next.namespace;
+            this.transitionType = smartTransition.getTransitionType(currentNamespace, nextNamespace);
+            
             // Clean up old event listeners
             const oldThemeToggle = document.getElementById("themeToggle");
             const oldChatToggle = document.getElementById("chat-toggle");
@@ -351,25 +517,22 @@ barba.init({
         },
 
         async leave(data) {
-            // Start the sliding transition
+            // Use smart transition with determined type
             return new Promise((resolve) => {
-                startPageTransition(() => {
-                    // Animate out existing elements
-                    const elements = slideTransition.prepareElements(data.current.container);
-                    if (elements) {
-                        slideTransition.animateOut(elements).then(resolve);
-                    } else {
-                        resolve();
-                    }
-                });
+                const elements = smartTransition.prepareElements(data.current.container);
+                if (elements) {
+                    smartTransition.animateOut(elements, this.transitionType).then(resolve);
+                } else {
+                    resolve();
+                }
             });
         },
 
         async enter(data) {
-            // Animate in new elements
-            const elements = slideTransition.prepareElements(data.next.container);
+            // Animate in new elements with the same transition type
+            const elements = smartTransition.prepareElements(data.next.container);
             if (elements) {
-                await slideTransition.animateIn(elements);
+                await smartTransition.animateIn(elements, this.transitionType);
             }
         },
 
@@ -382,6 +545,11 @@ barba.init({
                 initChatWidget();
                 ensureFloatingElements();
                 initManualTransitions();
+                
+                // Handle animated background for all pages
+                if (typeof initAnimatedBackgroundOnAllPages !== 'undefined') {
+                    initAnimatedBackgroundOnAllPages();
+                }
                 
                 // Restore theme state
                 const themeToggle = document.getElementById("themeToggle");
@@ -405,6 +573,19 @@ barba.init({
 // ===============================
 // Manual Navigation Handler (Fallback)
 // ===============================
+function getCurrentNamespace(path) {
+    // Extract namespace from path
+    const pathMap = {
+        '/': 'home',
+        '/about': 'about', 
+        '/projects': 'projects',
+        '/certifications': 'certifications',
+        '/cv': 'cv',
+        '/contact': 'contact'
+    };
+    return pathMap[path] || 'home';
+}
+
 function initManualTransitions() {
     // Handle navigation links manually as fallback
     document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"])').forEach(link => {
@@ -417,9 +598,24 @@ function initManualTransitions() {
                     const href = this.getAttribute('href');
                     if (href && href !== window.location.pathname) {
                         e.preventDefault();
-                        startPageTransition(() => {
+                        
+                        // Determine transition type based on current and target pages
+                        const currentPath = window.location.pathname;
+                        const targetPath = href;
+                        const currentNamespace = getCurrentNamespace(currentPath);
+                        const nextNamespace = getCurrentNamespace(targetPath);
+                        const transitionType = smartTransition.getTransitionType(currentNamespace, nextNamespace);
+                        
+                        // Start smart transition
+                        const currentContainer = document.querySelector('[data-barba="container"]');
+                        if (currentContainer) {
+                            const elements = smartTransition.prepareElements(currentContainer);
+                            smartTransition.animateOut(elements, transitionType).then(() => {
+                                window.location.href = href;
+                            });
+                        } else {
                             window.location.href = href;
-                        });
+                        }
                     }
                 }
             });
@@ -435,6 +631,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initChatWidget();
     ensureFloatingElements();
     initManualTransitions();
+    
+    // Initialize animated background for all pages
+    if (typeof initAnimatedBackgroundOnAllPages !== 'undefined') {
+        initAnimatedBackgroundOnAllPages();
+    }
+    
     document.body.classList.add('visible');
     
     // Run floating elements check less frequently to avoid interference
