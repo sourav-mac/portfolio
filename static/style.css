@@ -1461,6 +1461,33 @@ body.dark-mode .card .content {
     width: 4px;
     height: 40px;
   }
+
+  /* Tablet hover and touch effects */
+  .card:hover,
+  .card:active,
+  .card:focus {
+    transform: translateY(-4px) !important;
+    border: 2px solid #6366f1 !important;
+    box-shadow: 
+      0 0 7px rgba(99, 102, 241, 0.4),
+      0 0 14px rgba(139, 92, 246, 0.2),
+      0 0 21px rgba(236, 72, 153, 0.1),
+      0 3px 14px rgba(99, 102, 241, 0.15) !important;
+    animation: colorChangeBorder 3s ease-in-out infinite !important;
+  }
+
+  .profile-container .card:hover,
+  .profile-container .card:active,
+  .profile-container .card:focus {
+    transform: translateY(-4px) !important;
+    border: 2px solid #6366f1 !important;
+    box-shadow: 
+      0 0 7px rgba(99, 102, 241, 0.4),
+      0 0 14px rgba(139, 92, 246, 0.2),
+      0 0 21px rgba(236, 72, 153, 0.1),
+      0 3px 14px rgba(99, 102, 241, 0.15) !important;
+    animation: colorChangeBorder 3s ease-in-out infinite !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1482,6 +1509,33 @@ body.dark-mode .card .content {
   .content::before {
     width: 3px;
     height: 30px;
+  }
+
+  /* Mobile hover and touch effects */
+  .card:hover,
+  .card:active,
+  .card:focus {
+    transform: translateY(-3px) !important;
+    border: 2px solid #6366f1 !important;
+    box-shadow: 
+      0 0 6px rgba(99, 102, 241, 0.4),
+      0 0 12px rgba(139, 92, 246, 0.2),
+      0 0 18px rgba(236, 72, 153, 0.1),
+      0 3px 12px rgba(99, 102, 241, 0.15) !important;
+    animation: colorChangeBorder 3s ease-in-out infinite !important;
+  }
+
+  .profile-container .card:hover,
+  .profile-container .card:active,
+  .profile-container .card:focus {
+    transform: translateY(-3px) !important;
+    border: 2px solid #6366f1 !important;
+    box-shadow: 
+      0 0 6px rgba(99, 102, 241, 0.4),
+      0 0 12px rgba(139, 92, 246, 0.2),
+      0 0 18px rgba(236, 72, 153, 0.1),
+      0 3px 12px rgba(99, 102, 241, 0.15) !important;
+    animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 }
 
