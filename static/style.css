@@ -1462,30 +1462,30 @@ body.dark-mode .card .content {
     height: 40px;
   }
 
-  /* Tablet hover and touch effects */
+  /* Tablet hover and touch effects - Same as desktop */
   .card:hover,
   .card:active,
   .card:focus {
-    transform: translateY(-4px) !important;
+    transform: translateY(-5px) !important;
     border: 2px solid #6366f1 !important;
     box-shadow: 
-      0 0 7px rgba(99, 102, 241, 0.4),
-      0 0 14px rgba(139, 92, 246, 0.2),
-      0 0 21px rgba(236, 72, 153, 0.1),
-      0 3px 14px rgba(99, 102, 241, 0.15) !important;
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(139, 92, 246, 0.2),
+      0 0 24px rgba(236, 72, 153, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15) !important;
     animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 
   .profile-container .card:hover,
   .profile-container .card:active,
   .profile-container .card:focus {
-    transform: translateY(-4px) !important;
+    transform: translateY(-5px) !important;
     border: 2px solid #6366f1 !important;
     box-shadow: 
-      0 0 7px rgba(99, 102, 241, 0.4),
-      0 0 14px rgba(139, 92, 246, 0.2),
-      0 0 21px rgba(236, 72, 153, 0.1),
-      0 3px 14px rgba(99, 102, 241, 0.15) !important;
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(139, 92, 246, 0.2),
+      0 0 24px rgba(236, 72, 153, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15) !important;
     animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 }
@@ -1511,30 +1511,30 @@ body.dark-mode .card .content {
     height: 30px;
   }
 
-  /* Mobile hover and touch effects */
+  /* Mobile hover and touch effects - Same as desktop */
   .card:hover,
   .card:active,
   .card:focus {
-    transform: translateY(-3px) !important;
+    transform: translateY(-5px) !important;
     border: 2px solid #6366f1 !important;
     box-shadow: 
-      0 0 6px rgba(99, 102, 241, 0.4),
-      0 0 12px rgba(139, 92, 246, 0.2),
-      0 0 18px rgba(236, 72, 153, 0.1),
-      0 3px 12px rgba(99, 102, 241, 0.15) !important;
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(139, 92, 246, 0.2),
+      0 0 24px rgba(236, 72, 153, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15) !important;
     animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 
   .profile-container .card:hover,
   .profile-container .card:active,
   .profile-container .card:focus {
-    transform: translateY(-3px) !important;
+    transform: translateY(-5px) !important;
     border: 2px solid #6366f1 !important;
     box-shadow: 
-      0 0 6px rgba(99, 102, 241, 0.4),
-      0 0 12px rgba(139, 92, 246, 0.2),
-      0 0 18px rgba(236, 72, 153, 0.1),
-      0 3px 12px rgba(99, 102, 241, 0.15) !important;
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(139, 92, 246, 0.2),
+      0 0 24px rgba(236, 72, 153, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15) !important;
     animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 }
@@ -2994,11 +2994,17 @@ body.dark-mode .bot-msg {
   }
 }
 
-/* Hover Effects */
+/* Hover Effects - Consistent across all devices */
 @media (hover: hover) {
   .card:hover {
-    box-shadow: 0 0 60px 8px var(--glow-shadow);
-    transform: translateX(-50%) scale(1.02) !important;
+    transform: translateY(-5px) !important;
+    border: 2px solid #6366f1 !important;
+    box-shadow: 
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(139, 92, 246, 0.2),
+      0 0 24px rgba(236, 72, 153, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15) !important;
+    animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 
   .card2:hover {
@@ -4681,16 +4687,16 @@ body.dark-mode .floating-shape.hexagon:after {
     justify-content: center !important;
   }
   
-  /* Tablet hover effects */
+  /* Tablet hover effects - Same as desktop */
   .profile-container .card:hover {
-    transform: translateY(-3px) scale(1.03);
-  }
-  
-  .profile-container .card:hover::before {
+    transform: translateY(-5px) !important;
+    border: 2px solid #6366f1 !important;
     box-shadow: 
-      0 0 25px rgba(99, 102, 241, 0.35),
-      0 0 50px rgba(139, 92, 246, 0.25),
-      0 0 75px rgba(16, 185, 129, 0.15);
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(139, 92, 246, 0.2),
+      0 0 24px rgba(236, 72, 153, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15) !important;
+    animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 }
 
@@ -4759,25 +4765,15 @@ body.dark-mode .floating-shape.hexagon:after {
     transform: none !important;
   }
   
-  /* Mobile hover adjustments */
-  .profile-container .card::before {
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-  }
-  
-  .profile-container .card:hover::before {
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    box-shadow: 
-      0 0 15px rgba(99, 102, 241, 0.3),
-      0 0 30px rgba(139, 92, 246, 0.2);
-  }
-  
+  /* Mobile hover adjustments - Same as desktop */
   .profile-container .card:hover {
-    transform: translateY(-1px) scale(1.01);
+    transform: translateY(-5px) !important;
+    border: 2px solid #6366f1 !important;
+    box-shadow: 
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(139, 92, 246, 0.2),
+      0 0 24px rgba(236, 72, 153, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15) !important;
+    animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 }

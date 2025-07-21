@@ -1,0 +1,16 @@
+/* FINAL OVERRIDE - COLOR CHANGING PROFILE HOVER EFFECT */
+.profile-container .card:hover,
+.profile-container .card.hover,
+.card:hover,
+body .profile-container .card:hover,
+.container .profile-container .card:hover {
+  transform: translateY(-5px) !important;
+  border: 2px solid #6366f1 !important;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(99, 102, 241, 0.5),
+    0 0 30px rgba(168, 85, 247, 0.3),
+    0 0 40px rgba(236, 72, 153, 0.2) !important;
+  animation: colorChangeBorder 3s ease-in-out infinite !important;
+  border-radius: 15px !important;
+}
