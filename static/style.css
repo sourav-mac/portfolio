@@ -443,15 +443,40 @@ footer {
     padding: 1rem 2rem !important;
   }
 
-  /* Apply spacing only to content sections */
+  /* Apply spacing only to content sections - MOBILE OPTIMIZED */
   section:not(.navbar) {
-    margin: 6rem 1rem 2rem 1rem;
-    padding: 4rem 1.5rem 2rem 1.5rem;
+    margin: 2rem 1rem 1rem 1rem !important;
+    padding: 2rem 1rem 1rem 1rem !important;
+    margin-top: 2rem !important;
+    padding-top: 2rem !important;
   }
 
   .hero {
-    margin: 2rem 1rem;
-    padding: 6rem 1.5rem 3rem;
+    margin: 1rem 1rem !important;
+    padding: 4rem 1rem 2rem !important;
+    margin-top: 1rem !important;
+    padding-top: 4rem !important;
+  }
+
+  /* Mobile optimizations for all sections */
+  .projects-grid,
+  .certifications-grid,
+  .cv-preview,
+  .contact-section {
+    margin: 2rem 1rem !important;
+    padding: 2rem 1rem !important;
+  }
+
+  /* Global section spacing override for mobile */
+  main[data-barba-namespace="home"] section,
+  main[data-barba-namespace="home"] .hero:not(.navbar),
+  main[data-barba-namespace="about"] section,
+  main[data-barba-namespace="projects"] section,
+  main[data-barba-namespace="certifications"] section,
+  main[data-barba-namespace="cv"] section,
+  main[data-barba-namespace="contact"] section {
+    margin-top: 2rem !important;
+    padding-top: 2rem !important;
   }
 
   h2 {
@@ -570,10 +595,39 @@ footer {
     padding: 1rem 2rem !important;
   }
 
-  /* Apply spacing only to content sections */
+  /* Apply spacing only to content sections - MOBILE OPTIMIZED */
   section:not(.navbar) {
-    margin-top: 6rem;
-    padding: 4rem 1rem 1.5rem 1rem;
+    margin-top: 1.5rem !important;
+    padding: 2rem 0.75rem 1rem 0.75rem !important;
+    margin: 1.5rem 0.5rem 1rem 0.5rem !important;
+  }
+
+  .hero {
+    margin: 1rem 0.5rem !important;
+    padding: 3rem 0.75rem 1.5rem !important;
+    margin-top: 1rem !important;
+    padding-top: 3rem !important;
+  }
+
+  /* Mobile optimizations for all sections */
+  .projects-grid,
+  .certifications-grid,
+  .cv-preview,
+  .contact-section {
+    margin: 1.5rem 0.5rem !important;
+    padding: 1.5rem 0.75rem !important;
+  }
+
+  /* Global section spacing override for very small mobile */
+  main[data-barba-namespace="home"] section,
+  main[data-barba-namespace="home"] .hero:not(.navbar),
+  main[data-barba-namespace="about"] section,
+  main[data-barba-namespace="projects"] section,
+  main[data-barba-namespace="certifications"] section,
+  main[data-barba-namespace="cv"] section,
+  main[data-barba-namespace="contact"] section {
+    margin-top: 1.5rem !important;
+    padding-top: 2rem !important;
   }
 
   .hero {
@@ -3061,6 +3115,162 @@ body.dark-mode .nav-links li a:hover {
 body.dark-mode .nav-links li a.active {
   background-color: var(--accent-color);
   color: white;
+}
+
+/* ===============================
+   COMPREHENSIVE MOBILE IMPROVEMENTS FOR ALL PAGES
+=============================== */
+
+/* Hero Section Mobile Fixes */
+@media (max-width: 768px) {
+  .hero {
+    margin: 1rem !important;
+    padding: 4rem 1rem 2rem !important;
+    margin-top: 1rem !important;
+    padding-top: 4rem !important;
+    min-height: 85vh !important;
+  }
+  
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, 2.5rem) !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .tagline {
+    font-size: 1.1rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .cta-buttons {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    margin: 0.5rem !important;
+    padding: 3rem 0.75rem 1.5rem !important;
+    margin-top: 0.5rem !important;
+    padding-top: 3rem !important;
+    min-height: 80vh !important;
+  }
+  
+  .hero h1 {
+    font-size: clamp(1.6rem, 5vw, 2rem) !important;
+  }
+  
+  .tagline {
+    font-size: 1rem !important;
+  }
+}
+
+/* Projects Section Mobile */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    margin: 2rem 1rem !important;
+    padding: 2rem 1rem !important;
+  }
+  
+  .project-card {
+    padding: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .project-card h3 {
+    font-size: 1.3rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+}
+
+/* Certifications Section Mobile */
+@media (max-width: 768px) {
+  .certifications-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    margin: 2rem 1rem !important;
+    padding: 2rem 1rem !important;
+  }
+  
+  .cert-item {
+    padding: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .cert-image {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* CV Section Mobile */
+@media (max-width: 768px) {
+  .cv-preview {
+    margin: 2rem 1rem !important;
+    padding: 2rem 1rem !important;
+  }
+  
+  .cv-buttons {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: center !important;
+  }
+  
+  .cv-buttons .btn {
+    width: 100% !important;
+    max-width: 250px !important;
+  }
+}
+
+/* Contact Section Mobile */
+@media (max-width: 768px) {
+  .contact-section {
+    margin: 2rem 1rem !important;
+    padding: 2rem 1rem !important;
+  }
+  
+  .contact-form {
+    padding: 1.5rem !important;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem !important;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    font-size: 1rem !important;
+    padding: 0.75rem !important;
+  }
+}
+
+/* Ultra-small screens (480px and below) */
+@media (max-width: 480px) {
+  .projects-grid,
+  .certifications-grid,
+  .cv-preview,
+  .contact-section {
+    margin: 1rem 0.5rem !important;
+    padding: 1.5rem 0.75rem !important;
+  }
+  
+  .project-card,
+  .cert-item {
+    padding: 1.25rem !important;
+  }
+  
+  .project-card h3,
+  .cert-item h3 {
+    font-size: 1.2rem !important;
+  }
+  
+  .cv-buttons .btn {
+    font-size: 0.9rem !important;
+    padding: 0.75rem 1.5rem !important;
+  }
 }
 
 /* ===============================

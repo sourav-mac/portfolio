@@ -164,7 +164,7 @@ class SmartTransition {
                 position: relative;
                 opacity: 1;
                 transform: none;
-                transition: all 0.6s ease-in-out;
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             }
             
             html.is-transitioning [data-barba="container"] {
@@ -175,7 +175,8 @@ class SmartTransition {
                 will-change: transform, opacity;
                 transform: translateX(0);
                 opacity: 1;
-                transition: opacity 0.6s ease, transform 0.6s ease;
+                transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                           transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             }
             
             html.is-transitioning {
@@ -186,18 +187,22 @@ class SmartTransition {
                 cursor: wait;
             }
             
-            /* Smart transition overlay */
+            /* Enhanced transition overlay with blur effect */
             .smart-transition-overlay {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(135deg, var(--bg-color) 0%, rgba(17, 17, 17, 0.95) 100%);
+                background: linear-gradient(135deg, 
+                    var(--bg-color) 0%, 
+                    rgba(17, 17, 17, 0.98) 100%);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
                 z-index: 9999;
                 opacity: 0;
                 pointer-events: none;
-                transition: opacity 0.4s ease-in-out;
+                transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
             
             .smart-transition-overlay.active {
@@ -217,10 +222,10 @@ class SmartTransition {
             .smart-transition-spinner {
                 width: 40px;
                 height: 40px;
-                border: 3px solid rgba(99, 102, 241, 0.3);
+                border: 3px solid rgba(99, 102, 241, 0.2);
                 border-top: 3px solid var(--accent-color);
                 border-radius: 50%;
-                animation: smartSpin 1s linear infinite;
+                animation: smartSpin 0.8s linear infinite;
                 margin: 0 auto 1rem;
             }
             
@@ -230,9 +235,56 @@ class SmartTransition {
             }
             
             .smart-transition-text {
-                font-size: 1rem;
-                opacity: 0.8;
+                font-size: 0.9rem;
+                opacity: 0.7;
                 font-weight: 500;
+                letter-spacing: 0.5px;
+            }
+            
+            /* Page loading states */
+            body.page-loaded {
+                animation: pageLoadFade 0.5s ease-out;
+            }
+            
+            @keyframes pageLoadFade {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            body.page-transition-complete .animate-item {
+                animation: subtleFloat 0.8s ease-out;
+            }
+            
+            @keyframes subtleFloat {
+                0% { transform: translateY(5px); opacity: 0.8; }
+                100% { transform: translateY(0); opacity: 1; }
+            }
+            
+            /* Preload indicator */
+            .preload-indicator {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, 
+                    transparent, 
+                    var(--accent-color), 
+                    transparent);
+                z-index: 10000;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+            
+            .preload-indicator.active {
+                opacity: 1;
+                animation: preloadSlide 1.5s ease-in-out infinite;
+            }
+            
+            @keyframes preloadSlide {
+                0% { transform: translateX(-100%); }
+                50% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
             }
             
             .heading, h1, h2, h3,
@@ -284,6 +336,11 @@ class SmartTransition {
             'certifications-to-projects': 'slideLeft',
             'cv-to-certifications': 'slideLeft',
             'contact-to-cv': 'slideLeft',
+            // Additional transitions TO about page from all pages
+            'projects-to-about': 'slideLeft',
+            'certifications-to-about': 'fadeUp',
+            'cv-to-about': 'fadeUp',
+            'contact-to-about': 'fadeUp',
             // Non-sequential transitions
             'home-to-projects': 'fadeUp',
             'home-to-contact': 'fadeDown',
@@ -291,6 +348,7 @@ class SmartTransition {
         };
         
         const transitionKey = `${currentNamespace}-to-${nextNamespace}`;
+        console.log('Transition:', transitionKey, 'Type:', transitions[transitionKey] || 'fade');
         return transitions[transitionKey] || 'fade';
     }
 
@@ -319,7 +377,7 @@ class SmartTransition {
         
         const tl = gsap.timeline({
             defaults: {
-                duration: 0.5,
+                duration: 0.4, // Faster transitions for smoother feel
                 ease: 'power2.inOut'
             }
         });
@@ -348,7 +406,7 @@ class SmartTransition {
         
         const tl = gsap.timeline({
             defaults: {
-                duration: 0.6,
+                duration: 0.5, // Slightly longer for enter animations
                 ease: 'power2.out'
             },
             onComplete: () => {
@@ -356,25 +414,7 @@ class SmartTransition {
                     overlay.classList.remove('active');
                 }
                 // Reset transforms on profile picture to preserve CSS centering
-                const profilePic = document.querySelector('.profile-pic');
-                const card2 = document.querySelector('.card2');
-                if (profilePic) {
-                    gsap.set(profilePic, { 
-                        x: 0,
-                        y: 0,
-                        scale: 1,
-                        rotation: 0
-                        // Removed clearProps to allow CSS hover effects
-                    });
-                }
-                if (card2) {
-                    gsap.set(card2, { 
-                        x: 0,
-                        y: 0,
-                        scale: 1,
-                        rotation: 0
-                    });
-                }
+                this.resetProfilePicture();
             }
         });
 
@@ -474,37 +514,135 @@ class SmartTransition {
         tl.to(elements.sections, { opacity: 1, stagger: 0.1 }, 0);
         return tl;
     }
+
+    // Enhanced loading indicator methods
+    showLoadingIndicator() {
+        const overlay = document.querySelector('.smart-transition-overlay');
+        if (overlay) {
+            overlay.classList.add('active');
+            // Add subtle pulse animation to spinner
+            const spinner = overlay.querySelector('.smart-transition-spinner');
+            if (spinner) {
+                gsap.to(spinner, {
+                    scale: 1.1,
+                    duration: 0.8,
+                    ease: "power2.inOut",
+                    yoyo: true,
+                    repeat: -1
+                });
+            }
+        }
+    }
+
+    hideLoadingIndicator() {
+        const overlay = document.querySelector('.smart-transition-overlay');
+        if (overlay) {
+            // Stop spinner animation
+            const spinner = overlay.querySelector('.smart-transition-spinner');
+            if (spinner) {
+                gsap.killTweensOf(spinner);
+                gsap.set(spinner, { scale: 1 });
+            }
+            
+            // Fade out overlay smoothly
+            gsap.to(overlay, {
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                    overlay.classList.remove('active');
+                    gsap.set(overlay, { opacity: 1 }); // Reset for next use
+                }
+            });
+        }
+    }
+
+    resetProfilePicture() {
+        const profilePic = document.querySelector('.profile-pic');
+        const card2 = document.querySelector('.card2');
+        const card = document.querySelector('.card');
+        
+        if (profilePic) {
+            gsap.set(profilePic, { 
+                x: 0, y: 0, scale: 1, rotation: 0,
+                clearProps: "transform" // This allows CSS to take over
+            });
+        }
+        if (card2) {
+            gsap.set(card2, { 
+                x: 0, y: 0, scale: 1, rotation: 0
+            });
+            card2.style.display = 'flex';
+            card2.style.alignItems = 'center';
+            card2.style.justifyContent = 'center';
+        }
+        if (card) {
+            gsap.set(card, { 
+                x: 0, y: 0, scale: 1, rotation: 0
+            });
+        }
+    }
 }
 
 const smartTransition = new SmartTransition();
 
 // ===============================
-// Barba.js Setup
+// Barba.js Setup - Enhanced for Ultra-Smooth Transitions
 // ===============================
+
+// Preload links for faster transitions
+function preloadNextPages() {
+    const currentPath = window.location.pathname;
+    const preloadMap = {
+        '/': ['/about', '/projects'],
+        '/about': ['/projects', '/'],
+        '/projects': ['/certifications', '/about'],
+        '/certifications': ['/cv', '/projects'],
+        '/cv': ['/contact', '/certifications'],
+        '/contact': ['/']
+    };
+    
+    const preloadUrls = preloadMap[currentPath] || [];
+    preloadUrls.forEach(url => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = url;
+        document.head.appendChild(link);
+    });
+}
+
 barba.hooks.beforeEnter(() => {
     window.scrollTo(0, 0);
+    // Preload next likely pages
+    preloadNextPages();
 });
 
 barba.hooks.after(() => {
     gsap.killTweensOf("*");
 });
 
-// Update the barba.init configuration:
+// Enhanced Barba configuration
 barba.init({
     debug: false,
-    timeout: 5000,
+    timeout: 8000, // Increased timeout for slower connections
+    requestError: (trigger, action, url, response) => {
+        console.warn('Barba request failed, falling back to regular navigation');
+        console.error('Request details:', { trigger, action, url, response });
+        window.location.href = url;
+    },
     prevent: ({ el }) => {
         return (
             !el ||
             el.classList.contains('prevent-barba') ||
             el.getAttribute('href')?.startsWith('#') ||
-            el.getAttribute('target') === '_blank' ||
             el.getAttribute('href')?.includes('tel:') ||
-            el.getAttribute('href')?.includes('mailto:')
+            el.getAttribute('href')?.includes('mailto:') ||
+            el.getAttribute('target') === '_blank' ||
+            el.hasAttribute('download')
         );
     },
     transitions: [{
-        name: 'smart-transition',
+        name: 'ultra-smooth-transition',
         sync: false,
 
         beforeOnce() {
@@ -516,6 +654,9 @@ barba.init({
             if (typeof initAnimatedBackgroundOnAllPages !== 'undefined') {
                 initAnimatedBackgroundOnAllPages();
             }
+            
+            // Add page loaded class for styling
+            document.body.classList.add('page-loaded');
         },
 
         beforeLeave(data) {
@@ -526,7 +667,10 @@ barba.init({
             const nextNamespace = data.next.namespace;
             this.transitionType = smartTransition.getTransitionType(currentNamespace, nextNamespace);
             
-            // Clean up old event listeners
+            // Show loading indicator
+            smartTransition.showLoadingIndicator();
+            
+            // Clean up old event listeners to prevent memory leaks
             const oldThemeToggle = document.getElementById("themeToggle");
             const oldChatToggle = document.getElementById("chat-toggle");
             const oldChatClose = document.getElementById("chat-close");
@@ -541,7 +685,11 @@ barba.init({
             return new Promise((resolve) => {
                 const elements = smartTransition.prepareElements(data.current.container);
                 if (elements) {
-                    smartTransition.animateOut(elements, this.transitionType).then(resolve);
+                    smartTransition.animateOut(elements, this.transitionType)
+                        .then(() => {
+                            // Small delay for ultra-smooth effect
+                            setTimeout(resolve, 50);
+                        });
                 } else {
                     resolve();
                 }
@@ -554,6 +702,9 @@ barba.init({
             if (elements) {
                 await smartTransition.animateIn(elements, this.transitionType);
             }
+            
+            // Hide loading indicator
+            smartTransition.hideLoadingIndicator();
         },
 
         afterEnter(data) {
@@ -588,42 +739,32 @@ barba.init({
                 }
                 
                 // Reset profile picture transforms after page transition
-                const profilePic = document.querySelector('.profile-pic');
-                const card2 = document.querySelector('.card2');
-                const card = document.querySelector('.card');
-                if (profilePic) {
-                    gsap.set(profilePic, { 
-                        x: 0,
-                        y: 0,
-                        scale: 1,
-                        rotation: 0
+                smartTransition.resetProfilePicture();
+                
+                // Smooth scroll to top if needed
+                if (window.scrollY > 0) {
+                    gsap.to(window, {
+                        scrollTo: { y: 0 },
+                        duration: 0.3,
+                        ease: "power2.out"
                     });
                 }
-                if (card2) {
-                    gsap.set(card2, { 
-                        x: 0,
-                        y: 0,
-                        scale: 1,
-                        rotation: 0
-                        // Removed clearProps to allow CSS hover effects
-                    });
-                    card2.style.display = 'flex';
-                    card2.style.alignItems = 'center';
-                    card2.style.justifyContent = 'center';
-                }
-                if (card) {
-                    gsap.set(card, { 
-                        x: 0,
-                        y: 0,
-                        scale: 1,
-                        rotation: 0
-                    });
-                    card.style.margin = '0 auto 2rem auto';
-                    card.style.position = 'relative';
-                    card.style.left = 'auto';
-                    card.style.right = 'auto';
-                }
-            }, 50);
+                
+                // Add loaded class for any delayed effects
+                document.body.classList.add('page-transition-complete');
+                setTimeout(() => {
+                    document.body.classList.remove('page-transition-complete');
+                }, 1000);
+                
+            }, 30); // Reduced delay for faster initialization
+        },
+
+        onError: (data) => {
+            console.error('Barba transition error:', data);
+            // Hide loading indicator
+            smartTransition.hideLoadingIndicator();
+            // Fallback to regular navigation
+            window.location.href = data.next.url.href;
         }
     }]
 });
