@@ -19,7 +19,7 @@
   --scroll-thumb-hover: #94a3b8;
   --sand-color: #f4d03f;
   --transition-duration: 700ms;
-  --bg-color-alpha: rgba(248, 250, 252, 0.85);
+  --bg-color-alpha: rgba(248, 250, 252, 0.98);
   --border-color-alpha: rgba(226, 232, 240, 0.7);
   --geometric-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.04'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
@@ -487,10 +487,9 @@ footer {
     margin: 0 auto 1.5rem auto;
   }
 
-  .card2 {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
+  .content {
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
   }
 }
 
@@ -812,7 +811,7 @@ footer {
     display: block !important;
   }
   
-  .profile-container .card2 {
+  .profile-container .content {
     margin: 0 auto !important;
     align-self: center !important;
   }
@@ -1330,49 +1329,97 @@ body.fade.visible {
   opacity: 1;
 }
 
-/* Profile Picture - Simple & Clean */
+/* Simple Profile Picture */
 .card {
-  width: clamp(200px, 20vw, 320px);
-  height: clamp(200px, 20vw, 320px);
-  background: transparent;
-  border-radius: 50%;
-  transition: all 0.4s ease;
-  padding: 0;
-  margin: 0 auto 2rem auto;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid var(--border-color);
-  display: block;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  background: linear-gradient(45deg, 
-    #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b, #fb5607);
-  background-size: 300% 300%;
-  border-radius: 50%;
-  z-index: -1;
-  opacity: 0;
-  filter: none;
-  transition: all 0.4s ease;
-  animation: gradientShift 3s ease infinite;
-}
-
-.card2 {
-  width: 100%;
-  height: 100%;
-  background-color: var(--card-bg);
-  border-radius: 50%;
-  transition: all 0.4s ease;
+  width: clamp(200px, 20vw, 280px);
+  height: clamp(200px, 20vw, 280px);
+  background: var(--card-bg);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: relative;
+  border-radius: 50%;
+  margin: 0 auto 2rem auto;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border: 2px solid #6366f1;
+  box-shadow: 
+    0 0 8px rgba(99, 102, 241, 0.4),
+    0 0 16px rgba(139, 92, 246, 0.2),
+    0 0 24px rgba(236, 72, 153, 0.1),
+    0 4px 16px rgba(99, 102, 241, 0.15);
+  animation: colorChangeBorder 3s ease-in-out infinite;
+}
+
+/* Profile Picture Hover Effect - High Specificity */
+.profile-container .card:hover {
+  transform: translateY(-5px) !important;
+  border: 2px solid #6366f1 !important;
+  box-shadow: 
+    0 0 8px rgba(99, 102, 241, 0.4),
+    0 0 16px rgba(139, 92, 246, 0.2),
+    0 0 24px rgba(236, 72, 153, 0.1),
+    0 4px 16px rgba(99, 102, 241, 0.15) !important;
+  animation: colorChangeBorder 3s ease-in-out infinite !important;
+}
+
+@keyframes colorChangeBorder {
+  0% {
+    border-color: #6366f1;
+    box-shadow: 
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(99, 102, 241, 0.2),
+      0 0 24px rgba(99, 102, 241, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15);
+  }
+  25% {
+    border-color: #8b5cf6;
+    box-shadow: 
+      0 0 8px rgba(139, 92, 246, 0.4),
+      0 0 16px rgba(139, 92, 246, 0.2),
+      0 0 24px rgba(139, 92, 246, 0.1),
+      0 4px 16px rgba(139, 92, 246, 0.15);
+  }
+  50% {
+    border-color: #ec4899;
+    box-shadow: 
+      0 0 8px rgba(236, 72, 153, 0.4),
+      0 0 16px rgba(236, 72, 153, 0.2),
+      0 0 24px rgba(236, 72, 153, 0.1),
+      0 4px 16px rgba(236, 72, 153, 0.15);
+  }
+  75% {
+    border-color: #10b981;
+    box-shadow: 
+      0 0 8px rgba(16, 185, 129, 0.4),
+      0 0 16px rgba(16, 185, 129, 0.2),
+      0 0 24px rgba(16, 185, 129, 0.1),
+      0 4px 16px rgba(16, 185, 129, 0.15);
+  }
+  100% {
+    border-color: #6366f1;
+    box-shadow: 
+      0 0 8px rgba(99, 102, 241, 0.4),
+      0 0 16px rgba(99, 102, 241, 0.2),
+      0 0 24px rgba(99, 102, 241, 0.1),
+      0 4px 16px rgba(99, 102, 241, 0.15);
+  }
+}
+
+.card .content {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
 }
 
@@ -1380,12 +1427,62 @@ body.fade.visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
   border-radius: 50%;
-  transition: all 0.4s ease;
-  display: block;
-  margin: 0;
-  position: relative;
+}
+
+/* Dark mode styles for animated card */
+body.dark-mode .card {
+  background: var(--card-bg);
+  box-shadow: 0px 0px 8px 2px rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .card .content {
+  background: var(--card-bg);
+}
+
+/* Mobile responsive styles for animated card */
+@media (max-width: 768px) {
+  .card {
+    width: clamp(160px, 25vw, 200px);
+    height: clamp(160px, 25vw, 200px);
+  }
+  
+  .card::before {
+    width: 60px;
+    height: 280px;
+  }
+  
+  .card::after {
+    width: 200px;
+    height: 280px;
+  }
+  
+  .content::before {
+    width: 4px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .card::before {
+    width: 50px;
+    height: 220px;
+  }
+  
+  .card::after {
+    width: 160px;
+    height: 220px;
+  }
+  
+  .content::before {
+    width: 3px;
+    height: 30px;
+  }
 }
 
 /* Desktop specific centering */
@@ -1709,7 +1806,7 @@ body.dark-mode .cert-list p:hover {
   padding: 8rem 2rem 4rem;
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, var(--bg-color) 0%, rgba(17, 17, 17, 0.8) 100%);
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.98) 0%, rgba(255, 255, 255, 0.96) 100%);
   border-radius: 16px;
   border: 1px solid var(--border-color);
   backdrop-filter: blur(20px);
@@ -1784,76 +1881,14 @@ body.dark-mode .cert-list p:hover {
   border-radius: 50%;
 }
 
-/* Hover Effects - Enhanced with thin border and subtle glow */
-@media (hover: hover) {
-  .card:hover {
-    border: 2px solid var(--accent-color);
-    box-shadow: 
-      0 0 15px rgba(99, 102, 241, 0.4),
-      0 0 30px rgba(99, 102, 241, 0.2),
-      0 4px 20px rgba(99, 102, 241, 0.1);
-    transform: translateY(-3px) scale(1.02);
-    transition: all 0.3s ease;
-  }
-
-  .card:hover .profile-pic {
-    filter: brightness(1.1) contrast(1.05) saturate(1.1);
-    transform: scale(0.98);
-    transition: all 0.3s ease;
-  }
+/* Dark mode styles for animated card */
+body.dark-mode .card {
+  background: var(--card-bg);
+  box-shadow: 0px 0px 8px 2px rgba(99, 102, 241, 0.4);
 }
 
-/* Profile-specific hover effects (more specific) */
-@media (hover: hover) {
-  .profile-container .card:hover {
-    border: 2px solid var(--accent-color);
-    background: transparent;
-    box-shadow: 
-      0 0 20px rgba(99, 102, 241, 0.5),
-      0 0 40px rgba(99, 102, 241, 0.3),
-      0 8px 25px rgba(99, 102, 241, 0.15);
-    transform: translateY(-3px) scale(1.02);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .profile-container .card:hover .profile-pic {
-    filter: brightness(1.1) contrast(1.05) saturate(1.1);
-    transform: scale(0.98);
-    transition: all 0.3s ease;
-  }
-
-  /* Add subtle inner glow effect */
-  .profile-container .card:hover::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
-    border-radius: 50%;
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    pointer-events: none;
-    z-index: 3;
-  }
-}
-
-/* Dark mode hover effects for profile picture */
-body.dark-mode .profile-container .card:hover {
-  border: 2px solid var(--accent-color);
-  background: transparent;
-  box-shadow: 
-    0 0 25px rgba(99, 102, 241, 0.6),
-    0 0 50px rgba(99, 102, 241, 0.4),
-    0 8px 30px rgba(99, 102, 241, 0.2);
-  transform: translateY(-3px) scale(1.02);
-}
-
-body.dark-mode .profile-container .card:hover .profile-pic {
-  filter: brightness(1.15) contrast(1.1) saturate(1.2);
-}
-
-body.dark-mode .profile-container .card:hover::after {
-  border: 1px solid rgba(99, 102, 241, 0.5);
+body.dark-mode .card .content {
+  background: var(--card-bg);
 }
 
 .profile-container .card2 {
@@ -1912,7 +1947,7 @@ body.dark-mode .profile-container .card:hover::after {
 
 /* Dark mode styling for hero section */
 body.dark-mode .hero {
-  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.8) 100%);
+  background: linear-gradient(135deg, rgba(17, 17, 17, 0.98) 0%, rgba(17, 17, 17, 0.96) 100%);
   border: 1px solid var(--border-color);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
@@ -3198,6 +3233,67 @@ body.dark-mode .nav-links li a.active {
     color: white;
   }
 
+  /* Mobile styles for about section */
+  .about-section {
+    margin: 2rem 1rem;
+    padding: 2rem 1rem;
+  }
+
+  .about-section .content-wrapper {
+    padding: 2rem 1.5rem;
+    margin: 0;
+  }
+
+  .about-section h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* Ensure sections are mobile-friendly */
+  section {
+    max-width: 100%;
+    margin: 2rem 1rem;
+    padding: 2rem 1rem;
+  }
+}
+
+/* Mobile styles for very small screens */
+@media (max-width: 480px) {
+  .about-section {
+    margin: 1rem 0.5rem;
+    padding: 1.5rem 0.5rem;
+  }
+
+  .about-section .content-wrapper {
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+  }
+
+  .about-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-section p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+
+  /* Very small screen sections */
+  section {
+    margin: 1rem 0.5rem;
+    padding: 1.5rem 0.75rem;
+    border-radius: 8px;
+  }
+
   .hamburger svg {
     height: 2.5em;
   }
@@ -3620,11 +3716,11 @@ body:has(.animated-background) header.hero {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.05)
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.4)
   );
   border-radius: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   margin: 2rem;
   box-shadow: 
     0 25px 80px rgba(99, 102, 241, 0.25),
@@ -3671,8 +3767,8 @@ body.dark-mode:has(.animated-background) header.hero {
   -webkit-backdrop-filter: blur(12px) saturate(120%);
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0.04)
+    rgba(17, 17, 17, 0.92),
+    rgba(17, 17, 17, 0.88)
   );
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 
