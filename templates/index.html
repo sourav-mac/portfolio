@@ -71,15 +71,18 @@
 
         <!-- 👋 Hero Section -->
         <header class="hero animate-item">
-            <div class="card animate-item">
-                <div class="card2">
-                    <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Sourav Mandal" class="profile-pic animate-item" />
+            <!-- Profile Picture and Name Container -->
+            <div class="profile-container animate-item">
+                <div class="card animate-item">
+                    <div class="card2">
+                        <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Sourav Mandal" class="profile-pic animate-item" />
+                    </div>
                 </div>
-            </div>
 
-            <!-- Profile Name -->
-            <div class="profile-name animate-item">
-                <h2 class="name-text">Sourav Mandal</h2>
+                <!-- Profile Name -->
+                <div class="profile-name animate-item">
+                    <h2 class="name-text">Sourav Mandal</h2>
+                </div>
             </div>
 
             <h1 class="animate-item">Create badass, AI-powered solutions with precision and passion.</h1>
@@ -120,6 +123,7 @@
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.2/browser/pixi.min.js"></script>
     <script src="{{ url_for('static', filename='animated-bg.js') }}"></script>
+    <script src="{{ url_for('static', filename='nav.js') }}"></script>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
     <script src="{{ url_for('static', filename='chat.js') }}"></script>
 </body>

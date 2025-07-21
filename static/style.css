@@ -583,16 +583,38 @@ footer {
   }
 
   .card {
-    width: 160px;
-    height: 160px;
-    margin: 0 auto 1.5rem auto;
+    width: 160px !important;
+    height: 160px !important;
+    margin: 0 auto 1.5rem auto !important;
     display: block;
+    overflow: hidden !important;
+    position: relative !important;
   }
 
   .card2 {
-    width: 160px;
-    height: 160px;
-    margin: 0 auto;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
   }
 
   .stats strong {
@@ -603,15 +625,37 @@ footer {
 /* Extra small screens */
 @media (max-width: 375px) {
   .card {
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 1rem auto;
+    width: 140px !important;
+    height: 140px !important;
+    margin: 0 auto 1rem auto !important;
+    overflow: hidden !important;
+    position: relative !important;
   }
 
   .card2 {
-    width: 140px;
-    height: 140px;
-    margin: 0 auto;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
   }
 
   .hero {
@@ -623,15 +667,37 @@ footer {
 /* Very small screens */
 @media (max-width: 320px) {
   .card {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 1rem auto;
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto 1rem auto !important;
+    overflow: hidden !important;
+    position: relative !important;
   }
 
   .card2 {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
   }
 }
 
@@ -656,6 +722,23 @@ footer {
     height: clamp(260px, 19vw, 320px);
     margin: 0 auto 2.8rem auto;
   }
+  
+  .card2 {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+  }
 }
 
 /* Standard Desktops (1400px - 1599px) */
@@ -664,6 +747,23 @@ footer {
     width: clamp(240px, 20vw, 300px);
     height: clamp(240px, 20vw, 300px);
     margin: 0 auto 2.6rem auto;
+  }
+  
+  .card2 {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
   }
 }
 
@@ -674,10 +774,57 @@ footer {
     height: clamp(220px, 21vw, 280px);
     margin: 0 auto 2.4rem auto;
   }
+  
+  .card2 {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+  }
 }
 
 /* Standard Laptops (992px - 1199px) */
-@media (max-width: 1199px) and (min-width: 992px) {
+/* Large Screens - Enhanced centering assurance */
+@media (min-width: 1200px) {
+  .profile-container {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1.5rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    align-self: center !important;
+  }
+  
+  .profile-container .profile-pic {
+    margin: 0 auto !important;
+    display: block !important;
+  }
+}
+
+/* Desktop screens - Enhanced centering */
+@media (min-width: 992px) and (max-width: 1199px) {
   .card {
     width: clamp(200px, 22vw, 260px);
     height: clamp(200px, 22vw, 260px);
@@ -1097,27 +1244,34 @@ footer {
 @media screen {
   .card {
     overflow: hidden !important;
-    contain: layout style !important;
+    contain: layout style size !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    position: relative !important;
+    margin: 0 auto 2rem auto !important;
   }
   
   .card2 {
     overflow: hidden !important;
-    contain: layout style !important;
+    contain: layout style size !important;
     box-sizing: border-box !important;
     max-width: 100% !important;
     max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    position: relative !important;
   }
   
   .profile-pic {
     max-width: 100% !important;
     max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
     box-sizing: border-box !important;
     object-position: center center !important;
     object-fit: cover !important;
@@ -1125,8 +1279,11 @@ footer {
     position: relative !important;
     top: 0 !important;
     left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
     transform: none !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
+    display: block !important;
   }
 }
 
@@ -1184,12 +1341,8 @@ body.fade.visible {
   margin: 0 auto 2rem auto;
   position: relative;
   overflow: hidden;
-  border: 1px solid transparent;
-  contain: layout style;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 2px solid var(--border-color);
+  display: block;
 }
 
 .card::before {
@@ -1207,12 +1360,13 @@ body.fade.visible {
   opacity: 0;
   filter: none;
   transition: all 0.4s ease;
+  animation: gradientShift 3s ease infinite;
 }
 
 .card2 {
   width: 100%;
   height: 100%;
-  background: transparent;
+  background-color: var(--card-bg);
   border-radius: 50%;
   transition: all 0.4s ease;
   display: flex;
@@ -1220,11 +1374,6 @@ body.fade.visible {
   align-items: center;
   overflow: hidden;
   position: relative;
-  z-index: 2;
-  contain: layout style;
-  box-sizing: border-box;
-  max-width: 100%;
-  max-height: 100%;
 }
 
 .profile-pic {
@@ -1234,37 +1383,30 @@ body.fade.visible {
   object-position: center center;
   border-radius: 50%;
   transition: all 0.4s ease;
+  display: block;
+  margin: 0;
   position: relative;
-  top: 0;
-  left: 0;
-  max-width: 100%;
-  max-height: 100%;
-  box-sizing: border-box;
 }
 
-/* Hover Effects */
-@media (hover: hover) {
-  .card:hover {
-    background: linear-gradient(45deg, 
-      #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b, #fb5607);
-    background-size: 300% 300%;
-    animation: gradientShift 2s ease infinite;
-    padding: 2px;
-    box-shadow: 
-      0 0 20px rgba(255, 0, 110, 0.4),
-      0 0 40px rgba(131, 56, 236, 0.3),
-      0 0 60px rgba(58, 134, 255, 0.2);
-    transform: translateY(-2px) scale(1.01);
+/* Desktop specific centering */
+@media (min-width: 768px) {
+  .card {
+    margin: 0 auto 2rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
   }
-
-  .card:hover::before {
-    opacity: 1;
-    animation: gradientShift 3s ease infinite;
-    filter: none;
+  
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
-
-  .card:hover .profile-pic {
-    transform: scale(0.99);
+  
+  .hero .card {
+    align-self: center !important;
   }
 }
 
@@ -1277,7 +1419,13 @@ body.fade.visible {
 
 /* Profile Name Styling */
 .profile-name {
-  margin: 2rem 0 1.5rem 0;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+/* Ensure profile name within container has less margin */
+.profile-container .profile-name {
+  margin: 0;
   text-align: center;
 }
 
@@ -1339,6 +1487,14 @@ body.fade.visible {
   .profile-name {
     margin: 1.5rem 0 1rem 0;
   }
+  
+  .profile-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1rem auto;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1359,6 +1515,14 @@ body.fade.visible {
   
   .profile-name {
     margin: 1.2rem 0 0.8rem 0;
+  }
+  
+  .profile-container {
+    margin-bottom: 1rem;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 0.8rem auto;
   }
 }
 
@@ -1553,6 +1717,164 @@ body.dark-mode .cert-list p:hover {
   overflow: hidden;
   margin: 2rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile container - groups profile picture and name together */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem;
+  position: relative;
+  text-align: center;
+}
+
+/* Ensure card within profile container is perfectly centered */
+.profile-container .card {
+  margin: 0 auto 1.5rem auto !important;
+  align-self: center !important;
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  display: block !important;
+}
+
+/* Ensure profile name is centered */
+.profile-container .profile-name {
+  text-align: center;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Ensure profile picture card2 container is centered */
+.profile-container .card2 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  margin: 0 auto !important;
+}
+
+/* Ensure profile picture itself is perfectly centered */
+.profile-container .profile-pic {
+  margin: 0 auto !important;
+  display: block !important;
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+}
+
+/* Profile Picture Hover Effects - Fixed Border Glow */
+.profile-container .card {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: visible;
+}
+
+/* Profile Picture Hover Effects - Enhanced Gradient */
+.profile-container .card {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: visible;
+  border-radius: 50%;
+}
+
+/* Hover Effects - Enhanced with thin border and subtle glow */
+@media (hover: hover) {
+  .card:hover {
+    border: 2px solid var(--accent-color);
+    box-shadow: 
+      0 0 15px rgba(99, 102, 241, 0.4),
+      0 0 30px rgba(99, 102, 241, 0.2),
+      0 4px 20px rgba(99, 102, 241, 0.1);
+    transform: translateY(-3px) scale(1.02);
+    transition: all 0.3s ease;
+  }
+
+  .card:hover .profile-pic {
+    filter: brightness(1.1) contrast(1.05) saturate(1.1);
+    transform: scale(0.98);
+    transition: all 0.3s ease;
+  }
+}
+
+/* Profile-specific hover effects (more specific) */
+@media (hover: hover) {
+  .profile-container .card:hover {
+    border: 2px solid var(--accent-color);
+    background: transparent;
+    box-shadow: 
+      0 0 20px rgba(99, 102, 241, 0.5),
+      0 0 40px rgba(99, 102, 241, 0.3),
+      0 8px 25px rgba(99, 102, 241, 0.15);
+    transform: translateY(-3px) scale(1.02);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .profile-container .card:hover .profile-pic {
+    filter: brightness(1.1) contrast(1.05) saturate(1.1);
+    transform: scale(0.98);
+    transition: all 0.3s ease;
+  }
+
+  /* Add subtle inner glow effect */
+  .profile-container .card:hover::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border-radius: 50%;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    pointer-events: none;
+    z-index: 3;
+  }
+}
+
+/* Dark mode hover effects for profile picture */
+body.dark-mode .profile-container .card:hover {
+  border: 2px solid var(--accent-color);
+  background: transparent;
+  box-shadow: 
+    0 0 25px rgba(99, 102, 241, 0.6),
+    0 0 50px rgba(99, 102, 241, 0.4),
+    0 8px 30px rgba(99, 102, 241, 0.2);
+  transform: translateY(-3px) scale(1.02);
+}
+
+body.dark-mode .profile-container .card:hover .profile-pic {
+  filter: brightness(1.15) contrast(1.1) saturate(1.2);
+}
+
+body.dark-mode .profile-container .card:hover::after {
+  border: 1px solid rgba(99, 102, 241, 0.5);
+}
+
+.profile-container .card2 {
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  background: var(--card-bg);
+}
+
+.profile-container .profile-pic {
+  position: relative;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+/* Gradient Animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .hero::before {
@@ -2496,16 +2818,22 @@ body.dark-mode .bot-msg {
 
 /* profile picture animation */
 .card {
-  width: 350px;
-  height: 350px;
+  width: clamp(200px, 20vw, 320px);
+  height: clamp(200px, 20vw, 320px);
   background-image: linear-gradient(163deg, var(--glow-light), var(--glow-dark));
   border-radius: 50%;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem auto;
 }
 
 .card2 {
-  width: 350px;
-  height: 350px;
+  width: 100%;
+  height: 100%;
   background-color: var(--card-bg);
   border-radius: 50%;
   transition: all 0.3s ease;
@@ -2513,41 +2841,81 @@ body.dark-mode .bot-msg {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
 .profile-pic {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
   border-radius: 50%;
   transition: all 0.4s ease;
+  display: block;
+  margin: 0;
+  position: relative;
 }
 
+/* Universal centering for all screen sizes */
+@media screen {
+  .card {
+    overflow: hidden !important;
+    contain: layout style size !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    margin: 0 auto 2rem auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  
+  .card2 {
+    overflow: hidden !important;
+    contain: layout style size !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+  
+  .profile-pic {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    object-position: center center !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+}
+
+/* Hover Effects */
 @media (hover: hover) {
   .card:hover {
     box-shadow: 0 0 60px 8px var(--glow-shadow);
+    transform: translateX(-50%) scale(1.02) !important;
   }
 
   .card2:hover {
     transform: scale(0.98);
   }
 }
-
-body:not(.dark-mode) .card:hover {
-  background-image: linear-gradient(163deg, #00cfff 0%, #ff6ec4 100%);
-  box-shadow: 0px 0px 30px 1px rgba(0, 207, 255, 0.3);
-}
-
-body.dark-mode .card:hover {
-  background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
-  box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
-}
-
-.card2:hover {
-  transform: scale(0.98);
-}
-
-
 
 /* ===============================
    Spinner Styles (Chat Loading)
@@ -3584,6 +3952,13 @@ body:has(.animated-background) .card {
   padding: 0;
   margin: 0 auto 2rem auto;
   overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: auto;
+  right: auto;
+  transform: none;
 }
 
 /* Ensure the glow effect works with animated background */
@@ -3987,5 +4362,272 @@ body.dark-mode .floating-shape.hexagon:after {
   .floating-shape {
     opacity: 0.3;
     filter: blur(2px);
+  }
+}
+
+/* ===============================================
+   RESPONSIVE PROFILE CONTAINER CENTERING
+   =============================================== */
+
+/* Ultra Large Screens (1920px+) */
+@media (min-width: 1920px) {
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 2rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Large Desktops (1400px - 1919px) */
+@media (min-width: 1400px) and (max-width: 1919px) {
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1.8rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Standard Desktops (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1.6rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Small Desktops / Large Laptops (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1.5rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Standard Laptops (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1.4rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Large Tablets (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 1.2rem !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1.2rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Tablet hover effects */
+  .profile-container .card:hover {
+    transform: translateY(-3px) scale(1.03);
+  }
+  
+  .profile-container .card:hover::before {
+    box-shadow: 
+      0 0 25px rgba(99, 102, 241, 0.35),
+      0 0 50px rgba(139, 92, 246, 0.25),
+      0 0 75px rgba(16, 185, 129, 0.15);
+  }
+}
+
+/* Small Tablets / Large Phones (480px - 575px) */
+@media (min-width: 480px) and (max-width: 575px) {
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Mobile Phones (up to 479px) */
+@media (max-width: 479px) {
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+    padding: 0 !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .card2 {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .profile-container .profile-pic {
+    margin: 0 auto !important;
+    display: block !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+  }
+  
+  /* Mobile hover adjustments */
+  .profile-container .card::before {
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+  }
+  
+  .profile-container .card:hover::before {
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    box-shadow: 
+      0 0 15px rgba(99, 102, 241, 0.3),
+      0 0 30px rgba(139, 92, 246, 0.2);
+  }
+  
+  .profile-container .card:hover {
+    transform: translateY(-1px) scale(1.01);
   }
 }

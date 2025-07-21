@@ -355,6 +355,27 @@ class SmartTransition {
                 if (overlay) {
                     overlay.classList.remove('active');
                 }
+                // Reset transforms on profile picture to preserve CSS centering
+                const profilePic = document.querySelector('.profile-pic');
+                const card2 = document.querySelector('.card2');
+                if (profilePic) {
+                    gsap.set(profilePic, { 
+                        clearProps: "transform,x,y,scale,rotation",
+                        x: 0,
+                        y: 0,
+                        scale: 1,
+                        rotation: 0
+                    });
+                }
+                if (card2) {
+                    gsap.set(card2, { 
+                        clearProps: "transform,x,y,scale,rotation",
+                        x: 0,
+                        y: 0,
+                        scale: 1,
+                        rotation: 0
+                    });
+                }
             }
         });
 
@@ -566,6 +587,45 @@ barba.init({
                     const isVisible = chatWidget.style.display === "flex";
                     chatToggle.style.display = isVisible ? "none" : "block";
                 }
+                
+                // Reset profile picture transforms after page transition
+                const profilePic = document.querySelector('.profile-pic');
+                const card2 = document.querySelector('.card2');
+                const card = document.querySelector('.card');
+                if (profilePic) {
+                    gsap.set(profilePic, { 
+                        clearProps: "all",
+                        x: 0,
+                        y: 0,
+                        scale: 1,
+                        rotation: 0
+                    });
+                }
+                if (card2) {
+                    gsap.set(card2, { 
+                        clearProps: "transform,x,y,scale,rotation",
+                        x: 0,
+                        y: 0,
+                        scale: 1,
+                        rotation: 0
+                    });
+                    card2.style.display = 'flex';
+                    card2.style.alignItems = 'center';
+                    card2.style.justifyContent = 'center';
+                }
+                if (card) {
+                    gsap.set(card, { 
+                        clearProps: "transform,x,y,scale,rotation,left,right,top,bottom",
+                        x: 0,
+                        y: 0,
+                        scale: 1,
+                        rotation: 0
+                    });
+                    card.style.margin = '0 auto 2rem auto';
+                    card.style.position = 'relative';
+                    card.style.left = 'auto';
+                    card.style.right = 'auto';
+                }
             }, 50);
         }
     }]
@@ -637,10 +697,139 @@ document.addEventListener('DOMContentLoaded', () => {
         initAnimatedBackgroundOnAllPages();
     }
     
+    // Ensure profile picture centering is preserved after any GSAP animations
+    function resetProfilePicTransforms() {
+        const profilePic = document.querySelector('.profile-pic');
+        const card2 = document.querySelector('.card2');
+        const card = document.querySelector('.card');
+        const profileContainer = document.querySelector('.profile-container');
+        
+        if (profilePic) {
+            // Clear all GSAP transforms and reset to default centered state
+            gsap.set(profilePic, { 
+                clearProps: "all",
+                x: 0,
+                y: 0,
+                scale: 1,
+                rotation: 0,
+                transformOrigin: "center center"
+            });
+            
+            // Force CSS centering properties for profile picture
+            profilePic.style.margin = '0 auto';
+            profilePic.style.display = 'block';
+            profilePic.style.position = 'relative';
+            profilePic.style.left = '0';
+            profilePic.style.right = '0';
+            profilePic.style.transform = 'none';
+        }
+        
+        if (card2) {
+            // Ensure card2 container maintains proper centering
+            gsap.set(card2, { 
+                clearProps: "transform,x,y,scale,rotation",
+                x: 0,
+                y: 0,
+                scale: 1,
+                rotation: 0
+            });
+            
+            // Force CSS centering properties
+            card2.style.display = 'flex';
+            card2.style.alignItems = 'center';
+            card2.style.justifyContent = 'center';
+            card2.style.margin = '0 auto';
+            card2.style.position = 'relative';
+            card2.style.left = '0';
+            card2.style.right = '0';
+            card2.style.transform = 'none';
+        }
+        
+        if (card) {
+            // Reset card container and ensure perfect centering
+            gsap.set(card, { 
+                clearProps: "transform,x,y,scale,rotation,left,right,top,bottom",
+                x: 0,
+                y: 0,
+                scale: 1,
+                rotation: 0
+            });
+            
+            // Apply simple centering without complex transforms
+            card.style.margin = '0 auto 1.5rem auto';
+            card.style.position = 'relative';
+            card.style.left = '0';
+            card.style.right = '0';
+            card.style.transform = 'none';
+            card.style.display = 'block';
+            card.style.alignSelf = 'center';
+        }
+        
+        if (profileContainer) {
+            // Ensure profile container centering across all devices
+            profileContainer.style.display = 'flex';
+            profileContainer.style.flexDirection = 'column';
+            profileContainer.style.alignItems = 'center';
+            profileContainer.style.justifyContent = 'center';
+            profileContainer.style.textAlign = 'center';
+            profileContainer.style.width = '100%';
+            profileContainer.style.position = 'relative';
+            profileContainer.style.left = '0';
+            profileContainer.style.right = '0';
+            profileContainer.style.transform = 'none';
+        }
+    }
+    
+    // Enhanced function to ensure centering on window resize
+    function ensureResponsiveCentering() {
+        resetProfilePicTransforms();
+        
+        // Force reflow to ensure CSS changes take effect
+        const profileContainer = document.querySelector('.profile-container');
+        if (profileContainer) {
+            profileContainer.style.display = 'none';
+            profileContainer.offsetHeight; // Trigger reflow
+            profileContainer.style.display = 'flex';
+        }
+    }
+    
+    // Reset immediately on load
+    resetProfilePicTransforms();
+    
+    // Reset periodically to ensure it stays centered (more frequent for better consistency)
+    setInterval(resetProfilePicTransforms, 500);
+    
+    // Also reset on window resize to handle responsive changes
+    window.addEventListener('resize', () => {
+        setTimeout(resetProfilePicTransforms, 100);
+    });
+    
+    // Reset after any GSAP animation completes
+    gsap.ticker.add(() => {
+        // Only reset if there are no active tweens on profile elements
+        const profilePic = document.querySelector('.profile-pic');
+        const card2 = document.querySelector('.card2');
+        if (profilePic && !gsap.isTweening(profilePic) && !gsap.isTweening(card2)) {
+            // Check every few frames when animations are idle
+            if (gsap.ticker.frame % 60 === 0) {
+                resetProfilePicTransforms();
+            }
+        }
+    });
+    
     document.body.classList.add('visible');
     
     // Run floating elements check less frequently to avoid interference
     setInterval(ensureFloatingElements, 5000);
+    
+    // Add window resize listener for responsive centering
+    window.addEventListener('resize', ensureResponsiveCentering);
+    window.addEventListener('orientationchange', () => {
+        setTimeout(ensureResponsiveCentering, 100);
+    });
+    
+    // Ensure centering after page load
+    setTimeout(resetProfilePicTransforms, 500);
 });
 
 // Handle cleanup before unload
