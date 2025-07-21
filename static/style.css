@@ -1308,7 +1308,7 @@ footer {
     height: 150px !important;
     margin: 0 auto 1rem auto !important;
     box-shadow: none !important;
-    border: 2px solid #333 !important;
+    border: 7px solid #333 !important;
   }
   
   .card::before {
@@ -1327,117 +1327,6 @@ body.fade {
 
 body.fade.visible {
   opacity: 1;
-}
-
-/* Simple Profile Picture */
-.card {
-  width: clamp(200px, 20vw, 280px);
-  height: clamp(200px, 20vw, 280px);
-  background: var(--card-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-  border-radius: 50%;
-  margin: 0 auto 2rem auto;
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  border: 2px solid #6366f1;
-  box-shadow: 
-    0 0 8px rgba(99, 102, 241, 0.4),
-    0 0 16px rgba(139, 92, 246, 0.2),
-    0 0 24px rgba(236, 72, 153, 0.1),
-    0 4px 16px rgba(99, 102, 241, 0.15);
-  animation: colorChangeBorder 3s ease-in-out infinite;
-}
-
-/* Profile Picture Hover Effect - High Specificity */
-.profile-container .card:hover {
-  transform: translateY(-5px) !important;
-  border: 2px solid #6366f1 !important;
-  box-shadow: 
-    0 0 8px rgba(99, 102, 241, 0.4),
-    0 0 16px rgba(139, 92, 246, 0.2),
-    0 0 24px rgba(236, 72, 153, 0.1),
-    0 4px 16px rgba(99, 102, 241, 0.15) !important;
-  animation: colorChangeBorder 3s ease-in-out infinite !important;
-}
-
-@keyframes colorChangeBorder {
-  0% {
-    border-color: #6366f1;
-    box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(99, 102, 241, 0.2),
-      0 0 24px rgba(99, 102, 241, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15);
-  }
-  25% {
-    border-color: #8b5cf6;
-    box-shadow: 
-      0 0 8px rgba(139, 92, 246, 0.4),
-      0 0 16px rgba(139, 92, 246, 0.2),
-      0 0 24px rgba(139, 92, 246, 0.1),
-      0 4px 16px rgba(139, 92, 246, 0.15);
-  }
-  50% {
-    border-color: #ec4899;
-    box-shadow: 
-      0 0 8px rgba(236, 72, 153, 0.4),
-      0 0 16px rgba(236, 72, 153, 0.2),
-      0 0 24px rgba(236, 72, 153, 0.1),
-      0 4px 16px rgba(236, 72, 153, 0.15);
-  }
-  75% {
-    border-color: #10b981;
-    box-shadow: 
-      0 0 8px rgba(16, 185, 129, 0.4),
-      0 0 16px rgba(16, 185, 129, 0.2),
-      0 0 24px rgba(16, 185, 129, 0.1),
-      0 4px 16px rgba(16, 185, 129, 0.15);
-  }
-  100% {
-    border-color: #6366f1;
-    box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(99, 102, 241, 0.2),
-      0 0 24px rgba(99, 102, 241, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15);
-  }
-}
-
-.card .content {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.profile-pic {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-/* Dark mode styles for animated card */
-body.dark-mode .card {
-  background: var(--card-bg);
-  box-shadow: 0px 0px 8px 2px rgba(99, 102, 241, 0.4);
-}
-
-body.dark-mode .card .content {
-  background: var(--card-bg);
 }
 
 /* Mobile responsive styles for animated card */
@@ -1461,33 +1350,6 @@ body.dark-mode .card .content {
     width: 4px;
     height: 40px;
   }
-
-  /* Tablet hover and touch effects - Same as desktop */
-  .card:hover,
-  .card:active,
-  .card:focus {
-    transform: translateY(-5px) !important;
-    border: 2px solid #6366f1 !important;
-    box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(139, 92, 246, 0.2),
-      0 0 24px rgba(236, 72, 153, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15) !important;
-    animation: colorChangeBorder 3s ease-in-out infinite !important;
-  }
-
-  .profile-container .card:hover,
-  .profile-container .card:active,
-  .profile-container .card:focus {
-    transform: translateY(-5px) !important;
-    border: 2px solid #6366f1 !important;
-    box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(139, 92, 246, 0.2),
-      0 0 24px rgba(236, 72, 153, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15) !important;
-    animation: colorChangeBorder 3s ease-in-out infinite !important;
-  }
 }
 
 @media (max-width: 480px) {
@@ -1509,33 +1371,6 @@ body.dark-mode .card .content {
   .content::before {
     width: 3px;
     height: 30px;
-  }
-
-  /* Mobile hover and touch effects - Same as desktop */
-  .card:hover,
-  .card:active,
-  .card:focus {
-    transform: translateY(-5px) !important;
-    border: 2px solid #6366f1 !important;
-    box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(139, 92, 246, 0.2),
-      0 0 24px rgba(236, 72, 153, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15) !important;
-    animation: colorChangeBorder 3s ease-in-out infinite !important;
-  }
-
-  .profile-container .card:hover,
-  .profile-container .card:active,
-  .profile-container .card:focus {
-    transform: translateY(-5px) !important;
-    border: 2px solid #6366f1 !important;
-    box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(139, 92, 246, 0.2),
-      0 0 24px rgba(236, 72, 153, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15) !important;
-    animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 }
 
@@ -1938,7 +1773,7 @@ body.dark-mode .cert-list p:hover {
 /* Dark mode styles for animated card */
 body.dark-mode .card {
   background: var(--card-bg);
-  box-shadow: 0px 0px 8px 2px rgba(99, 102, 241, 0.4);
+  border: 2px solid var(--border-color);
 }
 
 body.dark-mode .card .content {
@@ -2996,17 +2831,6 @@ body.dark-mode .bot-msg {
 
 /* Hover Effects - Consistent across all devices */
 @media (hover: hover) {
-  .card:hover {
-    transform: translateY(-5px) !important;
-    border: 2px solid #6366f1 !important;
-    box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(139, 92, 246, 0.2),
-      0 0 24px rgba(236, 72, 153, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15) !important;
-    animation: colorChangeBorder 3s ease-in-out infinite !important;
-  }
-
   .card2:hover {
     transform: scale(0.98);
   }
@@ -4690,12 +4514,12 @@ body.dark-mode .floating-shape.hexagon:after {
   /* Tablet hover effects - Same as desktop */
   .profile-container .card:hover {
     transform: translateY(-5px) !important;
-    border: 2px solid #6366f1 !important;
+    border: 3px solid transparent !important;
     box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(139, 92, 246, 0.2),
-      0 0 24px rgba(236, 72, 153, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15) !important;
+      0 0 12px rgba(99, 102, 241, 0.6),
+      0 0 24px rgba(99, 102, 241, 0.4),
+      0 0 36px rgba(99, 102, 241, 0.2),
+      0 4px 20px rgba(99, 102, 241, 0.25) !important;
     animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 }
@@ -4763,17 +4587,5 @@ body.dark-mode .floating-shape.hexagon:after {
     left: 0 !important;
     right: 0 !important;
     transform: none !important;
-  }
-  
-  /* Mobile hover adjustments - Same as desktop */
-  .profile-container .card:hover {
-    transform: translateY(-5px) !important;
-    border: 2px solid #6366f1 !important;
-    box-shadow: 
-      0 0 8px rgba(99, 102, 241, 0.4),
-      0 0 16px rgba(139, 92, 246, 0.2),
-      0 0 24px rgba(236, 72, 153, 0.1),
-      0 4px 16px rgba(99, 102, 241, 0.15) !important;
-    animation: colorChangeBorder 3s ease-in-out infinite !important;
   }
 }

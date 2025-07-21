@@ -360,16 +360,15 @@ class SmartTransition {
                 const card2 = document.querySelector('.card2');
                 if (profilePic) {
                     gsap.set(profilePic, { 
-                        clearProps: "transform,x,y,scale,rotation",
                         x: 0,
                         y: 0,
                         scale: 1,
                         rotation: 0
+                        // Removed clearProps to allow CSS hover effects
                     });
                 }
                 if (card2) {
                     gsap.set(card2, { 
-                        clearProps: "transform,x,y,scale,rotation",
                         x: 0,
                         y: 0,
                         scale: 1,
@@ -594,7 +593,6 @@ barba.init({
                 const card = document.querySelector('.card');
                 if (profilePic) {
                     gsap.set(profilePic, { 
-                        clearProps: "all",
                         x: 0,
                         y: 0,
                         scale: 1,
@@ -603,11 +601,11 @@ barba.init({
                 }
                 if (card2) {
                     gsap.set(card2, { 
-                        clearProps: "transform,x,y,scale,rotation",
                         x: 0,
                         y: 0,
                         scale: 1,
                         rotation: 0
+                        // Removed clearProps to allow CSS hover effects
                     });
                     card2.style.display = 'flex';
                     card2.style.alignItems = 'center';
@@ -615,7 +613,6 @@ barba.init({
                 }
                 if (card) {
                     gsap.set(card, { 
-                        clearProps: "transform,x,y,scale,rotation,left,right,top,bottom",
                         x: 0,
                         y: 0,
                         scale: 1,
@@ -705,15 +702,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const profileContainer = document.querySelector('.profile-container');
         
         if (profilePic) {
-            // Clear all GSAP transforms and reset to default centered state
+            // Reset GSAP transforms but preserve CSS hover capabilities
             gsap.set(profilePic, { 
-                clearProps: "all",
                 x: 0,
                 y: 0,
                 scale: 1,
                 rotation: 0,
                 transformOrigin: "center center"
+                // Removed clearProps to allow CSS hover effects
             });
+            
+            // Ensure hover effects work by preserving CSS transition capability
+            if (profilePic.parentElement && profilePic.parentElement.classList.contains('card')) {
+                profilePic.parentElement.style.transition = 'all 0.3s ease';
+            }
             
             // Force CSS centering properties for profile picture
             profilePic.style.margin = '0 auto';
@@ -727,11 +729,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (card2) {
             // Ensure card2 container maintains proper centering
             gsap.set(card2, { 
-                clearProps: "transform,x,y,scale,rotation",
                 x: 0,
                 y: 0,
                 scale: 1,
                 rotation: 0
+                // Removed clearProps to allow CSS hover effects
             });
             
             // Force CSS centering properties
@@ -748,11 +750,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (card) {
             // Reset card container and ensure perfect centering
             gsap.set(card, { 
-                clearProps: "transform,x,y,scale,rotation,left,right,top,bottom",
                 x: 0,
                 y: 0,
                 scale: 1,
                 rotation: 0
+                // Removed clearProps to allow CSS hover effects
             });
             
             // Apply simple centering without complex transforms
@@ -830,7 +832,32 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Ensure centering after page load
     setTimeout(resetProfilePicTransforms, 500);
+    
+    // Initialize hover effects to ensure they work after GSAP resets
+    setTimeout(initializeHoverEffects, 600);
 });
+
+// Function to reinitialize hover effects
+function initializeHoverEffects() {
+    const card = document.querySelector('.card');
+    const profileContainer = document.querySelector('.profile-container');
+    
+    if (card) {
+        // Ensure the card can accept hover effects
+        card.style.pointerEvents = 'auto';
+        card.style.cursor = 'pointer';
+        
+        // Force CSS transitions to be enabled
+        card.style.transition = 'all 0.3s ease, border 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease';
+        
+        // Test hover effect programmatically
+        console.log('Hover effects initialized for profile card');
+    }
+    
+    if (profileContainer) {
+        profileContainer.style.pointerEvents = 'auto';
+    }
+}
 
 // Handle cleanup before unload
 window.addEventListener('beforeunload', () => {

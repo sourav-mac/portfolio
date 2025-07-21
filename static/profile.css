@@ -1,0 +1,415 @@
+/* ===============================
+   PROFILE PICTURE STYLES
+=============================== */
+
+/* Profile Container */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Main Profile Card */
+.card {
+  width: clamp(200px, 20vw, 280px);
+  height: clamp(200px, 20vw, 280px);
+  background: var(--card-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 50%;
+  margin: 0 auto 2rem auto;
+  border: 3px solid var(--border-color);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  touch-action: manipulation; /* Optimize for touch */
+}
+
+/* Hover Effect with Color-Changing Border */
+.profile-container .card:hover,
+.card:hover,
+.profile-container .card:active,
+.card:active,
+.profile-container .card:focus,
+.card:focus {
+  animation: colorChangeBorder 2s ease-in-out infinite !important;
+}
+
+/* Mobile/Tablet Touch Support - Universal Animation */
+@media (max-width: 1024px) {
+  .profile-container .card:active,
+  .card:active,
+  .profile-container .card:focus,
+  .card:focus,
+  .profile-container .card:hover,
+  .card:hover {
+    animation: colorChangeBorder 2s ease-in-out infinite !important;
+  }
+}
+
+/* Mobile Touch Support */
+@media (max-width: 768px) {
+  .profile-container .card,
+  .card {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .profile-container .card:active,
+  .card:active,
+  .profile-container .card:focus,
+  .card:focus {
+    animation: colorChangeBorder 2s ease-in-out infinite !important;
+  }
+}
+
+/* Content Wrapper */
+.card .content {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Profile Picture Image */
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Dark Mode Profile Styles */
+body.dark-mode .card {
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+}
+
+body.dark-mode .card .content {
+  background: var(--card-bg);
+}
+
+/* Dark Mode Hover Override */
+body.dark-mode .profile-container .card:hover,
+body.dark-mode .card:hover,
+body.dark-mode .profile-container .card:active,
+body.dark-mode .card:active,
+body.dark-mode .profile-container .card:focus,
+body.dark-mode .card:focus {
+  animation: colorChangeBorder 2s ease-in-out infinite !important;
+}
+
+/* Profile Name Styling */
+.profile-name {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.profile-container .profile-name {
+  margin: 0;
+  text-align: center;
+}
+
+.name-text {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-color), #8b5cf6, #ec4899, var(--accent-color));
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 8s ease-in-out infinite;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+=============================== */
+
+/* Large Screens (1200px+) */
+@media (min-width: 1200px) {
+  .profile-container {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1.5rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .content {
+    margin: 0 auto !important;
+    align-self: center !important;
+  }
+  
+  .profile-container .profile-pic {
+    margin: 0 auto !important;
+    display: block !important;
+  }
+}
+
+/* Desktop (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .card {
+    width: clamp(200px, 22vw, 260px);
+    height: clamp(200px, 22vw, 260px);
+    margin: 0 auto 2.2rem auto;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+}
+
+/* Tablet (769px - 991px) */
+@media (min-width: 769px) and (max-width: 991px) {
+  .card {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 2rem auto;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+}
+
+/* Mobile Landscape (569px - 768px) */
+@media (min-width: 569px) and (max-width: 768px) {
+  .card {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 1.8rem auto;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+}
+
+/* Mobile Portrait (480px - 568px) */
+@media (min-width: 480px) and (max-width: 568px) {
+  .card {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 1.6rem auto;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+}
+
+/* Small Mobile (up to 479px) */
+@media (max-width: 479px) {
+  .card {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1.4rem auto;
+  }
+  
+  .profile-container {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+    padding: 0 !important;
+  }
+  
+  .profile-container .card {
+    margin: 0 auto 1rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    align-self: center !important;
+    display: block !important;
+  }
+  
+  .profile-container .profile-pic {
+    margin: 0 auto !important;
+    display: block !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+  }
+  
+  .profile-pic {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+
+  .name-text {
+    font-size: 2.5rem;
+  }
+}
+
+/* Extra Small Mobile (320px - 374px) */
+@media (max-width: 374px) {
+  .card {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.2rem auto;
+  }
+  
+  .name-text {
+    font-size: 2rem;
+  }
+}
+
+/* Desktop Centering */
+@media (min-width: 768px) {
+  .card {
+    margin: 0 auto 2rem auto !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+  }
+  
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .hero .card {
+    align-self: center !important;
+  }
+}
+
+/* ===============================
+   ANIMATIONS
+=============================== */
+
+/* Color-Changing Border Animation */
+@keyframes colorChangeBorder {
+  0% {
+    border: 3px solid #6366f1; /* Blue */
+  }
+  16.66% {
+    border: 3px solid #8b5cf6; /* Purple */
+  }
+  33.33% {
+    border: 3px solid #ec4899; /* Pink */
+  }
+  50% {
+    border: 3px solid #10b981; /* Green */
+  }
+  66.66% {
+    border: 3px solid #f59e0b; /* Orange */
+  }
+  83.33% {
+    border: 3px solid #ef4444; /* Red */
+  }
+  100% {
+    border: 3px solid #6366f1; /* Back to Blue */
+  }
+}
+
+/* Gradient Animation for Name */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   PRINT STYLES
+=============================== */
+
+@media print {
+  .card {
+    width: 150px !important;
+    height: 150px !important;
+    margin: 0 auto 1rem auto !important;
+    box-shadow: none !important;
+    border: 2px solid #333 !important;
+  }
+  
+  .name-text {
+    color: #000 !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+  }
+}
